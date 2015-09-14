@@ -2,17 +2,21 @@ package teste.model.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import teste.converters.SynsetTypeEnumConverter;
 import teste.enums.SynsetTypeEnum;
 
 @Entity
@@ -20,29 +24,31 @@ import teste.enums.SynsetTypeEnum;
 public class Synset {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "synset_id_gen")
+	@SequenceGenerator(name = "synset_id_gen", sequenceName = "sq_synset_id", allocationSize = 1)
 	private int id;
 
-	@Column(length = 1)
-	@Enumerated(EnumType.STRING)
+	@Column(name = "pos_speech")
+	@Convert(converter = SynsetTypeEnumConverter.class)
 	private SynsetTypeEnum type;
 
-	@Column(length = 10, unique = true)
+	@Column(name = "original_id")
 	private String originalId;
 
-	@Column
+	@Column(name = "positive_score")
 	private float positiveScore;
 
-	@Column
+	@Column(name = "negative_score")
 	private float negativeScore;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "synset")
 	private List<SynsetTerm> terms;
 
 	@Column
 	private String gloss;
 
 	@ManyToOne
+	@JoinColumn(name = "language_id")
 	private Language language;
 
 	@Transient

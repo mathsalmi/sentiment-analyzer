@@ -12,6 +12,7 @@ import teste.model.entities.Teste;
 import teste.model.services.TesteService;
 
 @Controller
+@RequestMapping("/")
 public class IndexController {
 
 	@Autowired

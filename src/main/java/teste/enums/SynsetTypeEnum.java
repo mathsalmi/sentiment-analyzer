@@ -9,27 +9,25 @@ package teste.enums;
  */
 public enum SynsetTypeEnum {
 
-	NOUN(1, "n", "NOUN"), VERB(2, "v", "VERB"), ADJECTIVE(3, "a", "ADJECTIVE"), ADVERB(4, "r", "ADVERB");
+	NOUN("n"), VERB("v"), ADJECTIVE("a"), ADVERB("r");
 
-	private final int id;
-	private final String codigo;
-	private final String nome;
+	private final String code;
 
-	SynsetTypeEnum(int id, String codigo, String nome) {
-		this.id = id;
-		this.codigo = codigo;
-		this.nome = nome;
+	SynsetTypeEnum(String code) {
+		this.code = code;
 	}
 
-	public int getId() {
-		return id;
+	public String getCode() {
+		return code;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
+	public static SynsetTypeEnum findByCode(String code) {
+		for (SynsetTypeEnum item : values()) {
+			if (item.getCode().equals(code)) {
+				return item;
+			}
+		}
 
-	public String getNome() {
-		return nome;
+		return null;
 	}
 }

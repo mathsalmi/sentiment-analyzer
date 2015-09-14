@@ -47,6 +47,7 @@
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql:false}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql:false}</prop>
+				<prop key="hibernate.default_schema">${jdbc.schema}</prop>
 			</props>
 		</property>
 	</bean>
