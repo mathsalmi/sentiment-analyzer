@@ -1,4 +1,4 @@
-package teste.controllers;
+package snet.controllers;
 
 //import java.io.BufferedReader;
 //import java.io.File;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//import teste.enums.SynsetTypeEnum;
-//import teste.model.entities.Language;
-//import teste.model.entities.Synset;
-//import teste.model.entities.SynsetTerm;
+//import snet.enums.SynsetTypeEnum;
+//import snet.model.entities.Language;
+//import snet.model.entities.Synset;
+//import snet.model.entities.SynsetTerm;
 
 @Controller
 @RequestMapping("migrador")

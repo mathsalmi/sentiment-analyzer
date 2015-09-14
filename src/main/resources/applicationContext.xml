@@ -7,7 +7,7 @@
 	<context:property-placeholder location="classpath:application.properties" />
 
 	<!-- Pacote base -->
-	<context:component-scan base-package="teste" />
+	<context:component-scan base-package="snet" />
 
 	<!-- Configuração por anotações -->
 	<context:annotation-config />
@@ -39,7 +39,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan">
 			<list>
-				<value>teste.model.entities</value>
+				<value>snet.model.entities</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -61,6 +61,6 @@
 	
 	<!-- Interceptadores  -->
 	<mvc:interceptors>
-		<bean class="teste.interceptors.ViewInterceptor" />
+		<bean class="snet.interceptors.ViewInterceptor" />
 	</mvc:interceptors>
 </beans>

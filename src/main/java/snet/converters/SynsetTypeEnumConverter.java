@@ -1,9 +1,9 @@
-package teste.converters;
+package snet.converters;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import teste.enums.SynsetTypeEnum;
+import snet.enums.SynsetTypeEnum;
 
 /**
  * Retorna o código do Enum selecionado antes de salvar o registro no DB

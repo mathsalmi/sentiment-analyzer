@@ -1,4 +1,4 @@
-package teste.model.entities;
+package snet.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

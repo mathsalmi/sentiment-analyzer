@@ -1,4 +1,4 @@
-package teste.interceptors;
+package snet.interceptors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

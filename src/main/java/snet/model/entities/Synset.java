@@ -1,4 +1,4 @@
-package teste.model.entities;
+package snet.model.entities;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import teste.converters.SynsetTypeEnumConverter;
-import teste.enums.SynsetTypeEnum;
+import snet.converters.SynsetTypeEnumConverter;
+import snet.enums.SynsetTypeEnum;
 
 @Entity
 @Table(name = "synset")

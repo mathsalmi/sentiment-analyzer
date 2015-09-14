@@ -1,4 +1,4 @@
-package teste.enums;
+package snet.enums;
 
 /**
  * Tipos de synset.

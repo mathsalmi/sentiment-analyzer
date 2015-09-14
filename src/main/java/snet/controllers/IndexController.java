@@ -1,4 +1,4 @@
-package teste.controllers;
+package snet.controllers;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import teste.model.entities.Teste;
-import teste.model.services.TesteService;
+import snet.model.entities.Teste;
+import snet.model.services.TesteService;
 
 @Controller
 @RequestMapping("/")
