@@ -1,0 +1,10 @@
+<body>
+	<form action="" method="post">
+		<input type="text" name="phrase" placeholder="Digite a frase" th:value="${phrase}" />
+		<input type="submit" value="Analisar" />
+	</form>
+	
+	<div th:if="${phraseVal != null}">
+		A frase é: <span th:text="${phraseVal}"></span>
+	</div>
+</body>

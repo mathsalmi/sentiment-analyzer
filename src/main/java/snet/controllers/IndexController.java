@@ -1,38 +1,36 @@
 package snet.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import snet.model.entities.Teste;
-import snet.model.services.TesteService;
+import snet.model.entities.Language;
+import snet.model.services.LanguageService;
+import snet.model.services.SynsetService;
 
 @Controller
 @RequestMapping("/")
 public class IndexController {
 
 	@Autowired
-	private TesteService service;
+	private SynsetService synService;
+
+	@Autowired
+	private LanguageService langService;
 
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(@RequestParam(required=false) String phrase, Model model) {
 
-		List<Teste> el = service.list();
+		if(phrase != null) {
+			Language lang = langService.findById("en");
+			String phraseVal = synService.classifyPhrase(phrase, lang);
 
-		model.addAttribute("list", el);
+			model.addAttribute("phrase", phrase);
+			model.addAttribute("phraseVal", phraseVal);
+		}
 
-		return "salmi2";
-	}
-
-	@RequestMapping("salmi1")
-	public String salmi1(@RequestParam(value = "name", required = false, defaultValue = "No name") String name, Model model) {
-
-		model.addAttribute("name", name);
-
-		return "redirect:/";
+		return "index";
 	}
 }
