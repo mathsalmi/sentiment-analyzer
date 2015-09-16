@@ -25,7 +25,7 @@ public class SynsetRepository {
 		Session session = sessionFactory.getCurrentSession();
 
 		String sql = "" +
-				";with d as ( " +
+				";with dados as ( " +
 				"	select " +
 				"		term, " +
 				"		sense_number, " +
@@ -35,20 +35,20 @@ public class SynsetRepository {
 				"	inner join synset s on st.synset_id=s.id " +
 				"	where term in (:terms) and language_id=:langId" +
 				")" +
-				", o as ( " +
+				", dados_somados as ( " +
 				"	select " +
 				"		term " +
 				"		,pos_speech " +
 				"		,sum(val / cast(sense_number as float)) score " +
 				"		,sum(1 / cast(sense_number as float)) summ " +
-				"	from d " +
+				"	from dados " +
 				"	group by term, pos_speech " +
 				")" +
 				"select " +
 				"	term " +
 				"	, pos_speech \"type\" " +
 				"	, (score / cast(summ as float)) \"value\" " +
-				"from o " +
+				"from dados_somados " +
 				"order by 1, 2 ";
 
 		Query q = session.createSQLQuery(sql);
