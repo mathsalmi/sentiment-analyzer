@@ -25,7 +25,7 @@ public class ViewInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
 		String viewName = modelAndView.getViewName();
-		if (viewName.startsWith("redirect:")) {
+		if (viewName.startsWith("redirect:") || viewName.startsWith("forward:")) {
 			return;
 		}
 
