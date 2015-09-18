@@ -1,0 +1,46 @@
+<body>
+	<div>
+		<h1>Synset</h1>
+		<h2>Edite um conceito</h2>
+		<form action="synset/save" method="post">
+			<input type="hidden" name="id" th:value="${synset?.id}" />
+			
+			<div>
+				<label>
+					Descrição:
+					<textarea name="gloss" placeholder="Cite uma frase de exemplo para esse conceito" th:text="${synset?.gloss}"></textarea>
+				</label>
+			</div>
+			
+			<div>
+				<label>
+					Tipo:
+					<select name="type" class="form-control">
+						<option th:each="type: ${types}" th:value="${type.code}" th:text="${type.name()}" th:selected="${synset?.type?.code} == ${type.code}"></option>
+					</select>
+				</label>
+			</div>
+			
+			<div>
+				<label>
+					Idioma:
+					<select name="language_id" class="form-control">
+						<option th:each="lang: ${langs}" th:value="${lang.id}" th:text="${lang.name}" th:selected="${synset?.language?.id} == ${lang.id}"></option>
+					</select>
+				</label>
+			</div>
+			
+			<div>
+				<label>
+					Termos:
+					<div th:each="term: ${synset?.terms}">
+						<input type="text" name="term" th:value="${term?.term}" />
+						<input type="number" name="sense_number" min="1" step="1" th:value="${term?.senseNumber}" placeholder="Grau de importância do tema" />
+					</div>
+				</label>
+			</div>
+			
+			<div><input type="submit" value="Salvar" class="btn btn-success" /></div>
+		</form>
+	</div>
+</body>

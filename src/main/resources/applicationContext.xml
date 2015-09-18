@@ -11,7 +11,11 @@
 
 	<!-- Configuração por anotações -->
 	<context:annotation-config />
-
+	<mvc:annotation-driven />
+	
+	<!-- View resources -->
+	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+	
 	<!-- View -->
 	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
 		<property name="prefix" value="/WEB-INF/views/" />

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import snet.dto.SynsetValueDTO;
 import snet.model.entities.Language;
+import snet.model.entities.Synset;
 
 @Repository
 @Transactional(readOnly = true)
@@ -57,5 +58,14 @@ public class SynsetRepository {
 		q.setResultTransformer(Transformers.aliasToBean(SynsetValueDTO.class));
 
 		return q.list();
+	}
+
+	public Synset getById(int id) {
+		Session session = sessionFactory.getCurrentSession();
+
+		Query q = session.createQuery("select s from Synset s inner join fetch s.terms where s.id=:id");
+		q.setInteger("id", id);
+
+		return (Synset) q.uniqueResult();
 	}
 }

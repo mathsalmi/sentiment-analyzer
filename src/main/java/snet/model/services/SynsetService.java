@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import snet.dto.SynsetValueDTO;
 import snet.model.entities.Language;
+import snet.model.entities.Synset;
 import snet.model.repositories.SynsetRepository;
 
 @Service
@@ -51,5 +52,9 @@ public class SynsetService {
 		}
 
 		return out;
+	}
+
+	public Synset getById(int id) {
+		return synRepo.getById(id);
 	}
 }

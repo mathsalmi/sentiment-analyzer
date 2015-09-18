@@ -1,10 +1,17 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>SNeT Analyzer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<!-- Bootstrap -->
+		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap.min.css}" />
+		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap-theme.min.css}" />
+		
+		<th:block th:include="${_page} :: head"></th:block>
 	</head>
 	
-	<body th:replace="${_content} :: body">
+	<body th:replace="${_page} :: body">
 	</body>
 </html>

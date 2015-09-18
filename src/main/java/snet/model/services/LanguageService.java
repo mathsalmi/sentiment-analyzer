@@ -1,5 +1,7 @@
 package snet.model.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class LanguageService {
 
 	public Language findById(String id) {
 		return repo.findById(id);
+	}
+
+	public List<Language> listAllActive() {
+		return repo.listAllActive();
 	}
 }
