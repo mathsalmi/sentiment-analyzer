@@ -1,5 +1,6 @@
 package snet.controllers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class IndexController {
 	@RequestMapping("/")
 	public String index(@RequestParam(required=false) String phrase, Model model) {
 
-		if(phrase != null) {
+		if(StringUtils.isNotBlank(phrase)) {
 			Language lang = langService.findById("en");
 			String phraseVal = synService.classifyPhrase(phrase, lang);
 
