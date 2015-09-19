@@ -5,13 +5,26 @@
 		<title>SNeT Analyzer</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
-		<!-- Bootstrap -->
 		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap.min.css}" />
 		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap-theme.min.css}" />
+		<link rel="stylesheet" th:href="@{/resources/css/master/index.css}" />
 		
 		<th:block th:include="${_page} :: head"></th:block>
 	</head>
 	
-	<body th:replace="${_page} :: body">
+	<body>
+		<header class="navbar navbar-header navbar-fixed-top">
+			<div class="container">
+				<div class="logo-header">SNeT Analyzer</div>
+			</div>
+		</header>
+		
+		<th:block th:include="${_page} :: body"></th:block>
+		
+		<footer class="navbar navbar-header navbar-fixed-bottom">
+			<div class="container text-right">
+				&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane
+			</div>
+		</footer>
 	</body>
 </html>

@@ -1,10 +1,25 @@
+<head>
+	<link rel="stylesheet" th:href="@{/resources/css/index.css}" />
+</head>
 <body>
-	<form action="" method="post">
-		<input type="text" name="phrase" placeholder="Digite a frase" th:value="${phrase}" />
-		<input type="submit" value="Analisar" />
-	</form>
+	<div class="container">
 	
-	<div th:if="${phraseVal != null}">
-		A frase é: <span th:text="${phraseVal}"></span>
+		<form th:action="@{/}" method="post">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="search-row search-col input-group">
+						<input type="text" name="phrase" placeholder="Digite a frase" th:value="${phrase}" class="form-control search-field" />
+						<span class="input-group-btn">
+							<button type="submit" title="Analisar" class="btn btn-default glyphicon glyphicon-search search-btn"></button>
+						</span>
+
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="search-row center-block search-result" th:if="${ ! #strings.isEmpty(phraseVal)}">
+			A frase é: <span th:text="${phraseVal}"></span>
+		</div>
 	</div>
 </body>
