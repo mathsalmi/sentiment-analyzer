@@ -19,6 +19,12 @@ public class SynsetService {
 	public List<SynsetValueDTO> getPhraseTokens(String phrase, Language lang) {
 		if(phrase != null) {
 			String[] terms = phrase.split(" ");
+			if(terms != null && terms.length > 0) {
+				for(int i = 0; i < terms.length; i++) {
+					terms[i] = terms[i].toLowerCase();
+				}
+			}
+
 			return synRepo.listTokensWithValue(terms, lang);
 		}
 
