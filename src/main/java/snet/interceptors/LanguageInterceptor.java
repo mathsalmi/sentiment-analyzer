@@ -1,14 +1,14 @@
 package snet.interceptors;
 
-import static snet.util.AppConstants.APP_ALL_LANGS;
-import static snet.util.AppConstants.APP_CURR_LANG;
-
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import snet.model.entities.Language;
 import snet.model.services.LanguageService;
+import snet.util.AppConstants;
 
 /**
  * Modifica e seleciona idioma.
@@ -27,7 +28,7 @@ public class LanguageInterceptor implements HandlerInterceptor {
 	@Autowired
 	private LanguageService langService;
 
-	public static List<Language> cacheLangs;
+	public static final Map<String, Language> cacheLangs = new LinkedHashMap<>();
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -40,33 +41,48 @@ public class LanguageInterceptor implements HandlerInterceptor {
 			return;
 		}
 
-		if(cacheLangs == null || cacheLangs.isEmpty()) {
-			cacheLangs = langService.listAllActive();
-		}
+		loadCache();
 
-		if(cacheLangs == null || cacheLangs.isEmpty()) {
+		if(cacheLangs.isEmpty()) {
 			throw new Exception("Necessário configurar idiomas ativos para a aplicação!");
 		}
 
-		Language currLang = null;
 		HttpSession session = request.getSession(true);
-		if(session.getAttribute(APP_CURR_LANG) != null) {
-			currLang = (Language) session.getAttribute(APP_CURR_LANG); 
-		} else {
-			currLang = cacheLangs.get(0);
+		Language currLang = (Language) session.getAttribute(AppConstants.APP_CURR_LANG);
+
+		// if changing language
+		String langParam = request.getParameter(AppConstants.APP_CURR_LANG);
+		if(StringUtils.isNotBlank(langParam)) {
+			currLang = cacheLangs.get(langParam);
+		}
+
+		// if still no language is selected, select the first added
+		if(currLang == null) {
+			currLang = cacheLangs.get(cacheLangs.keySet().toArray()[0]);
 		}
 
 		// save on the session
-		session.setAttribute(APP_CURR_LANG, currLang);
+		session.setAttribute(AppConstants.APP_CURR_LANG, currLang);
 
 		// save on the view
 		ModelMap mm = modelAndView.getModelMap();
-		mm.addAttribute(APP_CURR_LANG, currLang);
-		mm.addAttribute(APP_ALL_LANGS, cacheLangs);
+		mm.addAttribute(AppConstants.APP_CURR_LANG, currLang);
+		mm.addAttribute(AppConstants.APP_ALL_LANGS, cacheLangs.values());
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
+	}
+
+	private void loadCache() {
+		if(cacheLangs.isEmpty()) {
+			List<Language> langs = langService.listAllActive();
+			if(langs != null && langs.size() > 0) {
+				for (Language lang : langs) {
+					cacheLangs.put(lang.getId(), lang);
+				}
+			}
+		}
 	}
 }
