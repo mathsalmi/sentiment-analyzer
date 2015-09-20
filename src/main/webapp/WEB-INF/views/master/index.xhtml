@@ -20,12 +20,12 @@
 			<div class="container">
 				<div class="logo-header">SNeT Analyzer</div>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							Idioma<span class="caret"></span>
+					<li class="dropdown" title="Modificar o idioma de análise de sentimento">
+						<a class="dropdown-toggle lang-toggle" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
+							<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li th:each="lang : ${_cacheLangs}"><a href="#" th:text="${lang.name}">Ação</a></li>
+							<li th:each="lang : ${_cacheLangs}"><a th:href="@{.(_currLang=${lang.id})}" th:text="${lang.name}">Ação</a></li>
 						</ul>
 					</li>
 				</ul>
