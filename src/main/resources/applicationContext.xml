@@ -66,6 +66,7 @@
 	
 	<!-- Interceptadores  -->
 	<mvc:interceptors>
+		<bean class="snet.interceptors.LanguageInterceptor" />
 		<bean class="snet.interceptors.ViewInterceptor" />
 	</mvc:interceptors>
 </beans>

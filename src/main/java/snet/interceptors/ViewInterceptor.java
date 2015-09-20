@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import snet.util.AppConstants;
+
 /**
  * Intercepta as requisições e utiliza os retornos dos métodos dos controladores
  * para incluí-los numa master page.
@@ -35,7 +37,7 @@ public class ViewInterceptor implements HandlerInterceptor {
 		}
 
 		modelAndView.setViewName("master/index");
-		modelAndView.getModelMap().addAttribute("_page", viewName);
+		modelAndView.getModelMap().addAttribute(AppConstants.APP_MASTER_VIEW_ATTR, viewName);
 	}
 
 	@Override

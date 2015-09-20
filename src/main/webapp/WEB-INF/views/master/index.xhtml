@@ -10,12 +10,25 @@
 		<link rel="stylesheet" th:href="@{/resources/css/master/index.css}" />
 		
 		<th:block th:include="${_page} :: head"></th:block>
+		
+		<script th:src="@{/resources/vendor/jquery/jquery-1.11.3.min.js}"></script>
+		<script th:src="@{/resources/vendor/bootstrap-3.3.5/js/bootstrap.min.js}"></script>
 	</head>
 	
 	<body>
 		<header class="navbar navbar-header navbar-fixed-top">
 			<div class="container">
 				<div class="logo-header">SNeT Analyzer</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							Idioma<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li th:each="lang : ${_cacheLangs}"><a href="#" th:text="${lang.name}">Ação</a></li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 		</header>
 		
@@ -23,7 +36,7 @@
 		
 		<footer class="navbar navbar-header navbar-fixed-bottom">
 			<div class="container text-right">
-				&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane
+				&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
 			</div>
 		</footer>
 	</body>

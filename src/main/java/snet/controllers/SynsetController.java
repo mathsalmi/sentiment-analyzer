@@ -18,7 +18,7 @@ import snet.model.services.SynsetService;
 
 @Controller
 @RequestMapping("synset")
-public class SynsetController {
+public class SynsetController extends AbstractController {
 
 	@Autowired
 	private SynsetService synService;
