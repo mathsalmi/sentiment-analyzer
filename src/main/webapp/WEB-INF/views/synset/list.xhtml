@@ -1,0 +1,35 @@
+<body>
+	<div class="container">
+		<div class="text-right">
+			<a th:href="@{/synset/new}" class="btn btn-default">Novo</a>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Gloss</th>
+					<th>Tipo</th>
+					<th>Positivo</th>
+					<th>Negativo</th>
+					<th>Termos</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="synset : ${synsets}">
+					<td th:text="${synset.gloss}"></td>
+					<td th:text="${synset.type.name()}"></td>
+					<td th:text="${synset.positiveScore}"></td>
+					<td th:text="${synset.negativeScore}"></td>
+					<td>
+						<th:block th:each="term : ${synset?.terms}">
+							<div th:text="${term.term}"></div>
+						</th:block>
+					</td>
+					<td>
+						<a th:href="@{'/synset/edit/' + ${synset.id}}">Editar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>

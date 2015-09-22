@@ -48,7 +48,7 @@ public class Synset {
 	private String gloss;
 
 	@ManyToOne
-	@JoinColumn(name = "language_id")
+	@JoinColumn(name = "language_id", nullable = false)
 	private Language language;
 
 	@Transient

@@ -16,12 +16,12 @@ import snet.model.entities.Synset;
 
 @Repository
 @Transactional(readOnly = true)
+@SuppressWarnings("unchecked")
 public class SynsetRepository {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@SuppressWarnings("unchecked")
 	public List<SynsetValueDTO> listTokensWithValue(String[] terms, Language lang) {
 		Session session = sessionFactory.getCurrentSession();
 
@@ -67,5 +67,21 @@ public class SynsetRepository {
 		q.setInteger("id", id);
 
 		return (Synset) q.uniqueResult();
+	}
+
+	public List<Synset> getByLangId(String langId) {
+		Session session = sessionFactory.getCurrentSession();
+
+		Query q = session.createQuery("select s from Synset s inner join fetch s.terms where s.language.id=:langId");
+		q.setMaxResults(15); // TODO: max results per page
+		q.setString("langId", langId);
+
+		return q.list();
+	}
+
+	@Transactional(readOnly=false)
+	public void save(Synset synset) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(synset);
 	}
 }

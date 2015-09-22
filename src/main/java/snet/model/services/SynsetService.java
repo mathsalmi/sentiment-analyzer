@@ -63,4 +63,18 @@ public class SynsetService {
 	public Synset getById(int id) {
 		return synRepo.getById(id);
 	}
+
+	public List<Synset> getByLangId(String langId) {
+		return synRepo.getByLangId(langId);
+	}
+
+	public boolean save(Synset synset) {
+		try {
+			synRepo.save(synset);
+			return true;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

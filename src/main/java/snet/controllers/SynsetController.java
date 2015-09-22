@@ -5,14 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import snet.enums.SynsetTypeEnum;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
+import snet.model.entities.SynsetTerm;
 import snet.model.services.LanguageService;
 import snet.model.services.SynsetService;
 
@@ -26,9 +27,13 @@ public class SynsetController extends AbstractController {
 	@Autowired
 	private LanguageService langService;
 
-	@RequestMapping("/")
-	public String index() {
-		return "index";
+	@RequestMapping("")
+	public String index(Model model) {
+
+		List<Synset> synsets = synService.getByLangId(currLang().getId());
+		model.addAttribute("synsets", synsets);
+
+		return "synset/list";
 	}
 
 	private void setFieldValues(Model model) {
@@ -55,7 +60,21 @@ public class SynsetController extends AbstractController {
 	}
 
 	@RequestMapping("save")
-	public String save(@Validated ModelAndView mv) {
-		return "redirect:/";
+	public String save(@ModelAttribute Synset synset, Errors errors) {
+		if( ! errors.hasErrors()) {
+			// fix relationship ids
+			List<SynsetTerm> terms = synset.getTerms();
+			if(terms != null && terms.size() > 0) {
+				for(SynsetTerm term : terms) {
+					if(term.getSynset() == null) {
+						term.setSynset(synset);
+					}
+				}
+			}
+
+			synService.save(synset);
+		}
+
+		return "redirect:/synset";
 	}
 }

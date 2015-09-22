@@ -6,7 +6,12 @@
 //import java.io.IOException;
 ////import java.io.InputStreamReader;
 ////import java.util.ArrayList;
+//import java.util.ArrayList;
+//import java.util.List;
 //
+//import org.hibernate.Session;
+//import org.hibernate.SessionFactory;
+//import org.springframework.beans.factory.annotation.Autowired;
 ////import org.hibernate.Query;
 ////import org.hibernate.Session;
 ////import org.hibernate.SessionFactory;
@@ -14,6 +19,11 @@
 //import org.springframework.stereotype.Controller;
 //import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.web.bind.annotation.RequestMapping;
+//
+//import snet.enums.SynsetTypeEnum;
+//import snet.model.entities.Language;
+//import snet.model.entities.Synset;
+//import snet.model.entities.SynsetTerm;
 //
 ////import snet.enums.SynsetTypeEnum;
 ////import snet.model.entities.Language;
@@ -24,12 +34,44 @@
 //@RequestMapping("migrador")
 //@Transactional(readOnly = false)
 //public class MigradorController {
-//	// @Autowired
-//	// private SessionFactory sessionFactory;
+//	@Autowired
+//	private SessionFactory sessionFactory;
 //
 //	@RequestMapping("")
 //	public String migrar() throws IOException {
-//		return "";
+//		//		return "";
+//
+//		Session session = sessionFactory.getCurrentSession();
+//
+//		Language pt = new Language();
+//		pt.setId("pt");
+//		//		Query q = session.createQuery("select l from Language l where l.id='pt'");
+//		//		Language pt = (Language) q.uniqueResult();
+//
+//		Synset s = new Synset();
+//		s.setType(SynsetTypeEnum.NOUN);
+//		s.setLanguage(pt);
+//		s.setPositiveScore(1);
+//		s.setNegativeScore(0);
+//		s.setGloss("ushusa");
+//
+//		SynsetTerm st1 = new SynsetTerm();
+//		st1.setSynset(s);
+//		st1.setTerm("amor");
+//		st1.setSenseNumber(1);
+//
+//		List<SynsetTerm> sts = new ArrayList<>();
+//		sts.add(st1);
+//
+//		s.setTerms(sts);
+//
+//		try {
+//			session.save(s);
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return "index";
 //
 //		// BufferedReader br = null;
 //		//
