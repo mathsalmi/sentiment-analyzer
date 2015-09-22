@@ -9,8 +9,7 @@ var EditSynset = {
 	},
 	
 	newTerm: function() {
-		var num = $('#termsWrapper').children('div').length
-		var id = (num == 0) ? 0 : num + 1;
+		var id = $('#termsWrapper').children('div').length;
 		
 		var html = $('<div />');
 			$('<input />').attr({
