@@ -11,7 +11,7 @@
 
 	<!-- Configuração por anotações -->
 	<context:annotation-config />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven conversion-service="conversionService" />
 	
 	<!-- View resources -->
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
@@ -64,9 +64,18 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<!-- Interceptadores  -->
+	<!-- Interceptadores -->
 	<mvc:interceptors>
 		<bean class="snet.interceptors.LanguageInterceptor" />
 		<bean class="snet.interceptors.ViewInterceptor" />
 	</mvc:interceptors>
+
+	<!-- Conversores -->
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="snet.converters.spring.StringToSynsetTypeEnumConverter" />
+			</list>
+		</property>
+	</bean>
 </beans>

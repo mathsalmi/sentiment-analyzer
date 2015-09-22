@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import snet.converters.SynsetTypeEnumConverter;
+import snet.converters.hibernate.SynsetTypeEnumConverter;
 import snet.enums.SynsetTypeEnum;
 
 @Entity

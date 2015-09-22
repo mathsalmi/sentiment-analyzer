@@ -1,4 +1,4 @@
-package snet.converters;
+package snet.converters.hibernate;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
