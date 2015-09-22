@@ -32,14 +32,6 @@ public class LanguageInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		return true;
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		if(modelAndView == null) {
-			return;
-		}
 
 		loadCache();
 
@@ -63,6 +55,18 @@ public class LanguageInterceptor implements HandlerInterceptor {
 
 		// save on the session
 		session.setAttribute(AppConstants.APP_CURR_LANG, currLang);
+
+		return true;
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+		if(modelAndView == null) {
+			return;
+		}
+
+		HttpSession session = request.getSession();
+		Language currLang = (Language) session.getAttribute(AppConstants.APP_CURR_LANG);
 
 		// save on the view
 		ModelMap mm = modelAndView.getModelMap();
