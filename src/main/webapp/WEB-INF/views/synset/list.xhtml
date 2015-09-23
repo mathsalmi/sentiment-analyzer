@@ -10,7 +10,7 @@
 					<th>Tipo</th>
 					<th>Positivo</th>
 					<th>Negativo</th>
-					<th>Termos</th>
+					<!-- <th>Termos</th> -->
 					<th>Ações</th>
 				</tr>
 			</thead>
@@ -20,11 +20,11 @@
 					<td th:text="${synset.type.name()}"></td>
 					<td th:text="${synset.positiveScore}"></td>
 					<td th:text="${synset.negativeScore}"></td>
-					<td>
+					<!-- <td>
 						<th:block th:each="term : ${synset?.terms}">
 							<div th:text="${term.term}"></div>
 						</th:block>
-					</td>
+					</td> -->
 					<td>
 						<a th:href="@{'/synset/edit/' + ${synset.id}}">Editar</a>
 					</td>

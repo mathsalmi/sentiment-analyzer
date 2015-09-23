@@ -72,7 +72,7 @@ public class SynsetRepository {
 	public List<Synset> getByLangId(String langId) {
 		Session session = sessionFactory.getCurrentSession();
 
-		Query q = session.createQuery("select s from Synset s inner join fetch s.terms where s.language.id=:langId");
+		Query q = session.createQuery("select s from Synset s where s.language.id=:langId");
 		q.setMaxResults(15); // TODO: max results per page
 		q.setString("langId", langId);
 
