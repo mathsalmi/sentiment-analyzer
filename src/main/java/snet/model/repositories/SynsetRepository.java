@@ -34,7 +34,7 @@ public class SynsetRepository {
 				"		(positive_score - negative_score) val " +
 				"	from synset_term st " +
 				"	inner join synset s on st.synset_id=s.id " +
-				"	where term in (:terms) and language_id=:langId" +
+				"	where lower(term) in (:terms) and language_id=:langId" +
 				")" +
 				", dados_somados as ( " +
 				"	select " +
