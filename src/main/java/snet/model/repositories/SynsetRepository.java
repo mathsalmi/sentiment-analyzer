@@ -84,4 +84,12 @@ public class SynsetRepository {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(synset);
 	}
+
+	@Transactional(readOnly=false)
+	public void delete(int id) throws Exception {
+		Session session = sessionFactory.getCurrentSession();
+		Query q = session.createSQLQuery("delete from synset where id=:id");
+		q.setInteger("id", id);
+		q.executeUpdate();
+	}
 }

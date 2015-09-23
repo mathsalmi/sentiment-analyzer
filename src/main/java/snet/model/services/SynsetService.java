@@ -81,7 +81,19 @@ public class SynsetService {
 			return true;
 		} catch(Exception e) {
 			e.printStackTrace();
-			return false;
 		}
+
+		return false;
+	}
+
+	public boolean delete(int id) {
+		try {
+			synRepo.delete(id);
+			return true;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 }
