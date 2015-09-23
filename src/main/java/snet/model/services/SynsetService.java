@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import snet.dto.SynsetValueDTO;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
+import snet.model.entities.SynsetTerm;
 import snet.model.repositories.SynsetRepository;
 
 @Service
@@ -69,6 +70,12 @@ public class SynsetService {
 	}
 
 	public boolean save(Synset synset) {
+
+		// somente salva termos em lowercase
+		for(SynsetTerm st : synset.getTerms()) {
+			st.setTerm(st.getTerm().toLowerCase());
+		}
+
 		try {
 			synRepo.save(synset);
 			return true;
