@@ -1,0 +1,26 @@
+.table-list {
+	border-spacing: 0px;
+	border-collapse: separate;
+	border:1px solid black;
+}
+
+.table-list thead tr {
+	background:#ccc;
+}
+
+.table-list thead th {
+	border-bottom:1px solid black;
+}
+
+.table-list tbody tr:nth-child(even) {
+	background:#efefef;
+}
+
+.table-list tbody tr:nth-child(odd) {
+	background:#fff;
+}
+
+.table-list tbody tr:hover {
+	background:#ddd;
+	cursor:pointer;
+}

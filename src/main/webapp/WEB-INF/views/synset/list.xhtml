@@ -1,16 +1,19 @@
+<head>
+	<link rel="stylesheet" th:href="@{/resources/css/synset/list.css}" />
+</head>
 <body>
 	<div class="container">
 		<div class="text-right">
 			<a th:href="@{/synset/new}" class="btn btn-default">Novo</a>
 		</div>
-		<table>
+		<table class="table-list">
 			<thead>
 				<tr>
 					<th>Gloss</th>
 					<th>Tipo</th>
 					<th>Positivo</th>
 					<th>Negativo</th>
-					<!-- <th>Termos</th> -->
+					<th>Termos</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
@@ -20,11 +23,11 @@
 					<td th:text="${synset.type.name()}"></td>
 					<td th:text="${synset.positiveScore}"></td>
 					<td th:text="${synset.negativeScore}"></td>
-					<!-- <td>
+					<td>
 						<th:block th:each="term : ${synset?.terms}">
 							<div th:text="${term.term}"></div>
 						</th:block>
-					</td> -->
+					</td>
 					<td>
 						<a th:href="@{'/synset/edit/' + ${synset.id}}">Editar</a>
 					</td>
