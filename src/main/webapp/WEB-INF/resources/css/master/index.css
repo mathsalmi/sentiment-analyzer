@@ -8,17 +8,18 @@ body {
 	color:#fff;
 	background:#323132;
 }
-	.navbar-header a {
-		color:inherit;
-	}
-	
 	.logo-header {
 		float:left;
 		font-size:30px;
 		
 		margin-top:4px;
 	}
+		.logo-header a {
+			color: inherit;
+			text-decoration: none;
+		}
 	
 	.lang-toggle {
 		cursor:pointer;
+		color:#fff !important;
 	}

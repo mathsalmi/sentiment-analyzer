@@ -18,7 +18,7 @@
 	<body>
 		<header class="navbar navbar-header navbar-fixed-top">
 			<div class="container">
-				<div class="logo-header">SNeT Analyzer</div>
+				<div class="logo-header"><a th:href="@{/}">SNeT Analyzer</a></div>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown" title="Modificar o idioma de análise de sentimento">
 						<a class="dropdown-toggle lang-toggle" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
@@ -35,8 +35,12 @@
 		<th:block th:include="${_page} :: body"></th:block>
 		
 		<footer class="navbar navbar-header navbar-fixed-bottom">
-			<div class="container text-right">
-				&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-push-2 text-center">
+						&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
+					</div>
+				</div>
 			</div>
 		</footer>
 	</body>
