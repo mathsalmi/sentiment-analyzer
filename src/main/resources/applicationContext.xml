@@ -1,3 +1,4 @@
+
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -85,9 +86,11 @@
 
 	<security:http use-expressions="true">
 		<security:intercept-url pattern="/adm/login" access="permitAll()" />
+		<security:intercept-url pattern="/adm/login-error" access="permitAll()" />
+		<security:intercept-url pattern="/adm/logout-success" access="permitAll()" />
 		<security:intercept-url pattern="/adm/**" access="isAuthenticated()" />
 		
-		<security:form-login login-page="/adm/login"   default-target-url="/adm/teste" login-processing-url="/adm/login" />
+		<security:form-login login-page="/adm/login" authentication-failure-url="/adm/login-error" default-target-url="/adm/teste" login-processing-url="/adm/login" />
 		
 		<security:logout logout-url="/adm/logout" logout-success-url="/adm/logout-success" />
 	</security:http>
