@@ -1,5 +1,8 @@
 package snet.model.entities;
 
+import java.util.Collection;
+import java.util.Collections;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
+
+	private static final long serialVersionUID = 6494740783283500882L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_gen")
@@ -37,6 +46,7 @@ public class User {
 		this.id = id;
 	}
 
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -45,6 +55,7 @@ public class User {
 		this.username = username;
 	}
 
+	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -67,5 +78,35 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	@Override
+	@Transient
+	public Collection<GrantedAuthority> getAuthorities() {
+		return Collections.emptyList();
+	}
+
+	@Override
+	@Transient
+	public boolean isAccountNonExpired() {
+		return isActive();
+	}
+
+	@Override
+	@Transient
+	public boolean isAccountNonLocked() {
+		return isActive();
+	}
+
+	@Override
+	@Transient
+	public boolean isCredentialsNonExpired() {
+		return isActive();
+	}
+
+	@Override
+	@Transient
+	public boolean isEnabled() {
+		return isActive();
 	}
 }
