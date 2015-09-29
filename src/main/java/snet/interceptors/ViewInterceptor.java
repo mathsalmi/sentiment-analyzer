@@ -44,10 +44,11 @@ public class ViewInterceptor implements HandlerInterceptor {
 			if(ann == null) {
 				ann = hm.getBeanType().getAnnotation(MasterView.class); // on the class
 			}
-
-			if(ann != null) {
-				shouldInject = ann.enable();
+			if(ann == null) {
+				return;
 			}
+
+			shouldInject = ann.enable();
 
 			masterViewFolder = ann.folder();
 			if(StringUtils.isBlank(masterViewFolder)) {
