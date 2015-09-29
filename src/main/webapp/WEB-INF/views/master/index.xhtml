@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html th:lang="${_currLang.id}">
 	<head>
 		<meta charset="utf-8" />
 		<title>SNeT Analyzer</title>
@@ -16,28 +16,36 @@
 	</head>
 	
 	<body>
-		<header class="navbar navbar-header navbar-fixed-top">
-			<div class="container">
-				<div class="logo-header"><a th:href="@{/}">SNeT Analyzer</a></div>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown" title="Modificar o idioma de análise de sentimento">
-						<a class="dropdown-toggle lang-toggle" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
-							<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li th:each="lang : ${_cacheLangs}"><a th:href="@{.(_currLang=${lang.id})}" th:text="${lang.name}">Ação</a></li>
+		<header>
+			<div class="container header-bottom-line">
+				<div class="row header">
+					<div class="col-md-8 col-md-push-2 text-center" style="background:green; height:100%;">
+						<h1 class="header-logo"><a th:href="@{/}">SNeT Analyzer</a></h1>
+						<p class="header-phrase">O SNeT Analyzer busca identificar o sentimento expresso nas frases, avaliando-as em positivas, negativas ou neutras.</p>
+					</div>
+					
+					<div class="col-md-2 col-md-push-2" style="background:red">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown" title="Modificar o idioma de análise de sentimento">
+								<a class="dropdown-toggle lang-toggle" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
+									<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li th:each="lang : ${_cacheLangs}"><a th:href="@{.(_currLang=${lang.id})}" th:text="${lang.name}">Ação</a></li>
+								</ul>
+							</li>
 						</ul>
-					</li>
-				</ul>
+					</div>
+				</div>
 			</div>
 		</header>
 		
 		<th:block th:include="${_page} :: body"></th:block>
 		
-		<footer class="navbar navbar-header navbar-fixed-bottom">
+		<footer class="footer navbar-fixed-bottom">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-md-push-2 text-center">
+					<div class="col-md-8 col-md-push-2 text-center footer-content" style="background:red">
 						&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
 					</div>
 				</div>
