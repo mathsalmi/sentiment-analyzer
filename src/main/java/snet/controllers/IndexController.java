@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import snet.annotations.MasterView;
 import snet.model.services.SynsetService;
 
 @Controller
 @RequestMapping("/")
+@MasterView
 public class IndexController extends AbstractController {
 
 	@Autowired

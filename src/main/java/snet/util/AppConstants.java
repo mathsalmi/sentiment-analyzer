@@ -13,4 +13,6 @@ public class AppConstants {
 
 	// View
 	public static final String APP_MASTER_VIEW_ATTR = "_page";
+	public static final String APP_MASTER_DEF_VIEW_FOLDER = "master";
+	public static final String APP_MASTER_DEF_VIEW_NAME = "index";
 }

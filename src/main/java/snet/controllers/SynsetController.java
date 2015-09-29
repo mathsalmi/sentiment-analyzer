@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import snet.annotations.MasterView;
 import snet.enums.SynsetTypeEnum;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
@@ -19,6 +20,7 @@ import snet.model.services.SynsetService;
 
 @Controller
 @RequestMapping("synset")
+@MasterView(name="index-adm")
 public class SynsetController extends AbstractController {
 
 	@Autowired

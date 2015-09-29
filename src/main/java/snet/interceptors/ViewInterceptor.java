@@ -3,9 +3,12 @@ package snet.interceptors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import snet.annotations.MasterView;
 import snet.util.AppConstants;
 
 /**
@@ -31,12 +34,43 @@ public class ViewInterceptor implements HandlerInterceptor {
 			return;
 		}
 
+		// checks for the MasterView page
+		boolean shouldInject = false;
+		String masterViewFolder = null;
+		String masterViewName = null;
+		try {
+			HandlerMethod hm = (HandlerMethod) handler;
+			MasterView ann = hm.getMethodAnnotation(MasterView.class); // on the method
+			if(ann == null) {
+				ann = hm.getBeanType().getAnnotation(MasterView.class); // on the class
+			}
+
+			if(ann != null) {
+				shouldInject = ann.enable();
+			}
+
+			masterViewFolder = ann.folder();
+			if(StringUtils.isBlank(masterViewFolder)) {
+				masterViewFolder = AppConstants.APP_MASTER_DEF_VIEW_FOLDER;
+			}
+
+			masterViewName = ann.name();
+			if(StringUtils.isBlank(masterViewName)) {
+				masterViewName = AppConstants.APP_MASTER_DEF_VIEW_NAME;
+			}
+		} catch(Exception e) { }
+
+		if(!shouldInject) {
+			return;
+		}
+
+		// ready to go!
 		String viewName = modelAndView.getViewName();
 		if (viewName.startsWith("redirect:") || viewName.startsWith("forward:")) {
 			return;
 		}
 
-		modelAndView.setViewName("master/index");
+		modelAndView.setViewName(masterViewFolder + "/" + masterViewName);
 		modelAndView.getModelMap().addAttribute(AppConstants.APP_MASTER_VIEW_ATTR, viewName);
 	}
 

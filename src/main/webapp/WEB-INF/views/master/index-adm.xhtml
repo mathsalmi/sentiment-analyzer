@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>SNeT Analyzer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap.min.css}" />
+		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap-theme.min.css}" />
+		<link rel="stylesheet" th:href="@{/resources/css/master/index.css}" />
+		
+		<th:block th:include="${_page} :: head"></th:block>
+		
+		<script th:src="@{/resources/vendor/jquery/jquery-1.11.3.min.js}"></script>
+		<script th:src="@{/resources/vendor/bootstrap-3.3.5/js/bootstrap.min.js}"></script>
+	</head>
+	
+	<body>
+		<header class="navbar navbar-header navbar-fixed-top">
+			<div class="container">
+				<div class="logo-header"><a th:href="@{/}">SNeT Analyzer ADMIN</a></div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown" title="Modificar o idioma de análise de sentimento">
+						<a class="dropdown-toggle lang-toggle" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
+							<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li th:each="lang : ${_cacheLangs}"><a th:href="@{.(_currLang=${lang.id})}" th:text="${lang.name}">Ação</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</header>
+		
+		<th:block th:include="${_page} :: body"></th:block>
+		
+		<footer class="navbar navbar-header navbar-fixed-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-push-2 text-center">
+						&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

@@ -4,8 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import snet.annotations.MasterView;
+
 @Controller
 @RequestMapping("adm")
+@MasterView(name="index-adm")
 public class LoginController extends AbstractController {
 
 	@RequestMapping("login")
