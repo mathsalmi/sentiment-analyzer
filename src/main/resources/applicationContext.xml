@@ -27,6 +27,11 @@
 	</bean>
 	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
+		<property name="additionalDialects">
+			<set>
+				<bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect" />
+			</set>
+		</property>
 	</bean>
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
@@ -90,7 +95,7 @@
 		<security:intercept-url pattern="/adm/logout-success" access="permitAll()" />
 		<security:intercept-url pattern="/adm/**" access="isAuthenticated()" />
 		
-		<security:form-login login-page="/adm/login" authentication-failure-url="/adm/login-error" default-target-url="/adm/teste" login-processing-url="/adm/login" />
+		<security:form-login login-page="/adm/login" authentication-failure-url="/adm/login-error" default-target-url="/adm/" login-processing-url="/adm/login" />
 		
 		<security:logout logout-url="/adm/logout" logout-success-url="/adm/logout-success" />
 	</security:http>

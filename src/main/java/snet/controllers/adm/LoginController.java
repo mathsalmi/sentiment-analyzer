@@ -31,13 +31,8 @@ public class LoginController extends AbstractController {
 		return "login/login";
 	}
 
-	@RequestMapping("teste")
-	public String teste() {
-		return "adm/teste";
-	}
-
-	@RequestMapping("teste2")
-	public String teste2() {
-		return "adm/teste2";
+	@RequestMapping({""})
+	public String index() {
+		return "redirect:/adm/synset";
 	}
 }
