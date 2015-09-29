@@ -3,31 +3,36 @@
 </head>
 <body>
 	<div class="container">
-		<div class="text-right">
-			<a th:href="@{/synset/new}" class="btn btn-default">Novo</a>
+		<div class="row">
+			<div class="col-md-1 col-md-push-11 text-right">
+				<a th:href="@{/adm/synset/new}" class="btn btn-default">Novo</a>
+			</div>
 		</div>
-		<table class="table-list">
-			<thead>
-				<tr>
-					<th>Menu</th>
-					<th>Gloss</th>
-					<th>Tipo</th>
-					<th colspan="2">Pontuação</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="synset : ${synsets}">
-					<td>
-						<a th:href="@{'/adm/synset/edit/' + ${synset.id}}" class="glyphicon glyphicon-pencil" title="Editar"><span class="hidden">Editar</span></a>
-						<a th:href="@{'/adm/synset/refresh/' + ${synset.id}}" class="glyphicon glyphicon-refresh" title="Recalcular valores"><span class="hidden">Atualizar</span></a>
-						<a th:href="@{'/adm/synset/delete/' + ${synset.id}}" class="glyphicon glyphicon-remove" title="Excluir"><span class="hidden">Excluir</span></a>
-					</td>
-					<td th:text="${synset.gloss}"></td>
-					<td th:text="${synset.type.name()}"></td>
-					<td th:text="'+' + ${synset.positiveScore}"></td>
-					<td th:text="'-' + ${synset.negativeScore}"></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="row">
+			<table class="table-list list-synset col-md-12">
+				<thead>
+					<tr>
+						<th width="60">Menu</th>
+						<th>Gloss</th>
+						<th width="110">Tipo</th>
+						<th width="110">Positivo</th>
+						<th width="110">Negativo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="synset : ${synsets}">
+						<td>
+							<a th:href="@{'/adm/synset/edit/' + ${synset.id}}" class="glyphicon glyphicon-pencil" title="Editar"><span class="hidden">Editar</span></a>
+							<a th:href="@{'/adm/synset/refresh/' + ${synset.id}}" class="glyphicon glyphicon-refresh" title="Recalcular valores"><span class="hidden">Atualizar</span></a>
+							<a th:href="@{'/adm/synset/delete/' + ${synset.id}}" class="glyphicon glyphicon-remove" title="Excluir"><span class="hidden">Excluir</span></a>
+						</td>
+						<td th:text="${synset.gloss}"></td>
+						<td class="text-center" th:text="${synset.type.name()}"></td>
+						<td class="text-center" th:text="'+' + ${synset.positiveScore}"></td>
+						<td class="text-center" th:text="'-' + ${synset.negativeScore}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import snet.annotations.MasterView;
+import snet.enums.PhraseScoreEnum;
 import snet.model.services.SynsetService;
 
 @Controller
@@ -21,10 +22,10 @@ public class IndexController extends AbstractController {
 	@RequestMapping("/")
 	public String index(@RequestParam(required=false) String phrase, Model model) {
 		if(StringUtils.isNotBlank(phrase)) {
-			String phraseVal = synService.classifyPhrase(phrase, currLang());
+			PhraseScoreEnum phraseScore = synService.classifyPhrase(phrase, currLang());
 
 			model.addAttribute("phrase", phrase);
-			model.addAttribute("phraseVal", phraseVal);
+			model.addAttribute("phraseScore", phraseScore);
 		}
 
 		return "index";

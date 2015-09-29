@@ -1,25 +1,26 @@
+<head>
+	<link rel="stylesheet" th:href="@{/resources/css/login.css}" />
+</head>
 <body>
 	<div class="container">
-		<div th:if="${loginError}">Usuário e senha incorretos!</div>
-		<div th:if="${logoutSuccess}">Sessão encerrada com sucesso!</div>
-		<form th:action="@{/adm/login}" method="post">
-			<div>
-				<label>
-					Usuário:
-					<input type="text" name="username" />
-				</label>
-			</div>
-			
-			<div>
-				<label>
-					Senha:
-					<input type="password" name="password" />
-				</label>
-			</div>
-			
-			<div class="text-center">
-				<input type="submit" value="Entrar" class="btn btn-default" />
-			</div>
-		</form>
+		<div class="login-group">
+			<div th:if="${loginError}">Usuário e senha incorretos!</div>
+			<div th:if="${logoutSuccess}">Sessão encerrada com sucesso!</div>
+			<form th:action="@{/adm/login}" method="post">
+				<div class="form-group">
+					<label>Usuário</label>
+					<input type="text" name="username" autofocus="autofocus" class="form-control" />
+				</div>
+				
+				<div class="form-group">
+					<label>Senha</label>
+					<input type="password" name="password" class="form-control" />
+				</div>
+				
+				<div class="text-center">
+					<input type="submit" value="Entrar" class="btn btn-default" />
+				</div>
+			</form>
+		</div>
 	</div>
 </body>

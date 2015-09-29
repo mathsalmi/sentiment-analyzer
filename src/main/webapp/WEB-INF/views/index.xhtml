@@ -3,23 +3,24 @@
 </head>
 <body>
 	<div class="container">
-	
-		<form th:action="@{/}" method="post">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="search-row search-col input-group">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 search-group">
+				<form th:action="@{/}" method="post">
+					<div class="input-group">
 						<input type="text" name="phrase" placeholder="Digite a frase" th:value="${phrase}" autofocus="autofocus" autocomplete="off" class="form-control search-field" />
 						<span class="input-group-btn">
-							<button type="submit" title="Analisar" class="btn btn-default glyphicon glyphicon-search search-btn"></button>
+							<button type="submit" title="Analisar" class="btn btn-default search-btn"><span class="glyphicon glyphicon-search"><span class="hide">Pesquisar</span></span></button>
 						</span>
-
 					</div>
-				</div>
+				</form>
 			</div>
-		</form>
-
-		<div class="search-row center-block search-result" th:if="${ ! #strings.isEmpty(phraseVal)}">
-			A frase é: <span th:text="${phraseVal}"></span>
+		</div>
+		
+		<div class="row" th:if="${phraseScore} != null">
+			<div th:class="'search-result search-result-color-' + ${phraseScore.code}">
+				<div class="search-result-text">Resultado:</div>
+				<div th:text="${phraseScore.toString()}" class="search-result-classify"></div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -1,65 +1,81 @@
 <body>
 	<div class="container">
-		<h1>Synset</h1>
-		<h2>Edite um conceito</h2>
-		<form th:action="@{/synset/save}" method="post">
-			<input type="hidden" name="id" th:value="${synset?.id}" th:if="${synset?.id != null}" />
-			
-			<div>
-				<label>
-					Descrição:
-					<textarea name="gloss" placeholder="Cite uma frase de exemplo para esse conceito" th:text="${synset?.gloss}"></textarea>
-				</label>
-			</div>
-			
-			<div>
-				<label>
-					Tipo:
-					<select name="type" class="form-control">
-						<option th:each="type: ${types}" th:value="${type.code}" th:text="${type.name()}" th:selected="${synset?.type?.code} == ${type.code}"></option>
-					</select>
-				</label>
-			</div>
-			
-			<div>
-				<label>
-					Idioma:
-					<select name="language.id" class="form-control">
-						<option th:each="lang: ${langs}" th:value="${lang.id}" th:text="${lang.name}" th:selected="${synset?.language?.id} == ${lang.id}"></option>
-					</select>
-				</label>
-			</div>
-			
-			<div>
-				<label>
-					Positivo:
-					<input type="number" min="0" max="1" step="0.1" name="positiveScore" th:value="${synset?.positiveScore}" /> 
-				</label>
-			</div>
-			
-			<div>
-				<label>
-					Negativo:
-					<input type="number" min="0" max="1" step="0.1" name="negativeScore" th:value="${synset?.negativeScore}" /> 
-				</label>
-			</div>
-			
-			<div>
-				<label>
-					Termos:
-					<a href="#" id="addTermBtn" class="btn btn-default">Add</a>
-					<div id="termsWrapper">
-						<div th:each="term, iterator : ${synset?.terms}">
-							<input type="hidden" th:name="'terms[' + ${iterator.index} + '].id'" th:value="${term?.id}" />
-							<input type="text" th:name="'terms[' + ${iterator.index} + '].term'" th:value="${term?.term}" />
-							<input type="number" th:name="'terms[' + ${iterator.index} + '].senseNumber'" min="1" step="1" th:value="${term?.senseNumber}" placeholder="Grau de importância do tema" />
+		<div class="row">
+			<div class="col-md-8 col-md-push-2">
+				<div class="page-title-group">
+					<h1 class="page-title">Conceito</h1>
+					<p class="page-title-text">Crie ou edite um conceito, relacionando palavras a exemplos.</p>
+				</div>
+				<form th:action="@{/adm/synset/save}" method="post">
+					<input type="hidden" name="id" th:value="${synset?.id}" th:if="${synset?.id != null}" />
+					
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label>Descrição</label>
+							<textarea name="gloss" rows="4" placeholder="Cite uma frase de exemplo para esse conceito" th:text="${synset?.gloss}" class="form-control resize-vert"></textarea>
 						</div>
 					</div>
-				</label>
+					
+					<div class="row">
+						<div class="form-group col-md-4">
+							<div class="form-group">
+								<label>Tipo</label>
+								<select name="type" class="form-control">
+									<option th:each="type: ${types}" th:value="${type.code}" th:text="${type.name()}" th:selected="${synset?.type?.code} == ${type.code}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Idioma</label>
+								<select name="language.id" class="form-control">
+									<option th:each="lang: ${langs}" th:value="${lang.id}" th:text="${lang.name}" th:selected="${synset?.language?.id} == ${lang.id}"></option>
+								</select>
+							</div>
+							<div class="form-group" th:if="${synset?.id != null}">
+								<label>Positivo</label>
+								<p class="form-control-static" th:text="${'+' + synset?.positiveScore}"></p>
+							</div>
+							<div class="form-group" th:if="${synset?.id != null}">
+								<label>Negativo</label>
+								<p class="form-control-static" th:text="${'-' + synset?.negativeScore}"></p>
+							</div>
+						</div>
+						
+						<div class="form-group col-md-8">
+<!-- 							<div class="form-group"> -->
+<!-- 								<label>Termos</label> -->
+<!-- 								<div class="form-inline"> -->
+<!-- 									<div class="form-group"> -->
+<!-- 										<input type="text" class="form-control" placeholder="Palavra" /> -->
+<!-- 										<a href="#" id="addTermBtn" class="btn btn-default"><span class="glyphicon glyphicon-plus"><span class="hide">Adicionar</span></span></a> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
+							<div class="form-group">
+								<label>Termos</label>
+								<a href="#" id="addTermBtn" class="btn btn-default"><span class="glyphicon glyphicon-plus"><span class="hide">Adicionar</span></span></a>
+								<p class="help-block hide">Ordene as palavras mais importantes primeiro.</p>
+								<div id="termsWrapper">
+									<div th:each="term, iterator : ${synset?.terms}" class="form-group form-inline synset-item">
+										<input type="hidden" th:name="'terms[' + ${iterator.index} + '].id'" th:value="${term?.id}" />
+										<input type="text" th:name="'terms[' + ${iterator.index} + '].term'" th:value="${term?.term}" class="form-control" />
+										<input type="number" th:name="'terms[' + ${iterator.index} + '].senseNumber'" min="1" step="1" th:value="${term?.senseNumber}" placeholder="Grau de importância do tema" class="form-control" />
+										<a href="#" class="btn btn-default synset-btn-delete" title="Excluir"><span class="glyphicon glyphicon-remove"><span class="hidden">Excluir</span></span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+					<div class="text-center">
+						<a th:href="@{/adm/synset/}" class="btn btn-default">Voltar</a>
+						<input type="submit" value="Salvar" class="btn btn-success" />
+					</div>
+				</form>
 			</div>
-			
-			<div><input type="submit" value="Salvar" class="btn btn-success" /></div>
-		</form>
+		</div>
 	</div>
 	
 	<script th:src="@{/resources/js/synset/edit.js}"></script>

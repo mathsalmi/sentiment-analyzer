@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import snet.dto.SynsetValueDTO;
+import snet.enums.PhraseScoreEnum;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
 import snet.model.entities.SynsetTerm;
@@ -32,7 +33,7 @@ public class SynsetService {
 		return null;
 	}
 
-	public String classifyPhrase(String phrase, Language lang) {
+	public PhraseScoreEnum classifyPhrase(String phrase, Language lang) {
 		double total = 0;
 		List<SynsetValueDTO> tokens = getPhraseTokens(phrase, lang);
 		if(tokens != null && tokens.size() > 0) {
@@ -41,21 +42,21 @@ public class SynsetService {
 			}
 		}
 
-		String out;
+		PhraseScoreEnum out;
 		if(total >= 0.75) {
-			out = "very positive";
+			out = PhraseScoreEnum.VERY_POSITIVE;
 		}else if(total > 0.25 && total < 0.5) {
-			out = "positive";
+			out = PhraseScoreEnum.POSITIVE;
 		}else if(total >= 0.5) {
-			out = "positive";
+			out = PhraseScoreEnum.POSITIVE;
 		}else if(total < 0 && total >= -0.25) {
-			out = "negative";
+			out = PhraseScoreEnum.NEGATIVE;
 		}else if(total < -0.25 && total >= -0.5) {
-			out = "negative";
+			out = PhraseScoreEnum.NEGATIVE;
 		}else if(total <= -0.75) {
-			out = "very negative";
+			out = PhraseScoreEnum.VERY_NEGATIVE;
 		}else {
-			out = "neutral";
+			out = PhraseScoreEnum.NEUTRAL;
 		}
 
 		return out;

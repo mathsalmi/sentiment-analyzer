@@ -7,6 +7,7 @@
 		
 		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap.min.css}" />
 		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap-theme.min.css}" />
+		<link rel="stylesheet" th:href="@{/resources/css/master/common.css}" />
 		<link rel="stylesheet" th:href="@{/resources/css/master/index-adm.css}" />
 		
 		<th:block th:include="${_page} :: head"></th:block>
@@ -31,7 +32,7 @@
 								<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li th:each="lang : ${_cacheLangs}"><a th:href="@{.(_currLang=${lang.id})}" th:text="${lang.name}">Ação</a></li>
+								<li th:each="lang : ${_cacheLangs}"><a th:href="'?_currLang=' + ${lang.id}" th:text="${lang.name}">Ação</a></li>
 							</ul>
 						</li>
 					</ul>
