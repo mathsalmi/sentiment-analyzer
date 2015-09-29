@@ -9,29 +9,23 @@
 		<table class="table-list">
 			<thead>
 				<tr>
+					<th>Menu</th>
 					<th>Gloss</th>
 					<th>Tipo</th>
-					<th>Positivo</th>
-					<th>Negativo</th>
-					<!-- <th>Termos</th> -->
-					<th>Ações</th>
+					<th colspan="2">Pontuação</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="synset : ${synsets}">
+					<td>
+						<a th:href="@{'/adm/synset/edit/' + ${synset.id}}" class="glyphicon glyphicon-pencil" title="Editar"><span class="hidden">Editar</span></a>
+						<a th:href="@{'/adm/synset/refresh/' + ${synset.id}}" class="glyphicon glyphicon-refresh" title="Recalcular valores"><span class="hidden">Atualizar</span></a>
+						<a th:href="@{'/adm/synset/delete/' + ${synset.id}}" class="glyphicon glyphicon-remove" title="Excluir"><span class="hidden">Excluir</span></a>
+					</td>
 					<td th:text="${synset.gloss}"></td>
 					<td th:text="${synset.type.name()}"></td>
-					<td th:text="${synset.positiveScore}"></td>
-					<td th:text="${synset.negativeScore}"></td>
-					<!-- <td>
-						<th:block th:each="term : ${synset?.terms}">
-							<div th:text="${term.term}"></div>
-						</th:block>
-					</td> -->
-					<td>
-						<a th:href="@{'/synset/edit/' + ${synset.id}}">Editar</a>
-						<a th:href="@{'/synset/delete/' + ${synset.id}}">Excluir</a>
-					</td>
+					<td th:text="'+' + ${synset.positiveScore}"></td>
+					<td th:text="'-' + ${synset.negativeScore}"></td>
 				</tr>
 			</tbody>
 		</table>

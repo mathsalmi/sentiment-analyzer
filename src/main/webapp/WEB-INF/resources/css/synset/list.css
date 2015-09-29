@@ -1,26 +1,39 @@
 .table-list {
 	border-spacing: 0px;
 	border-collapse: separate;
-	border:1px solid black;
 }
 
-.table-list thead tr {
-	background:#ccc;
-}
-
-.table-list thead th {
-	border-bottom:1px solid black;
-}
-
-.table-list tbody tr:nth-child(even) {
-	background:#efefef;
-}
-
-.table-list tbody tr:nth-child(odd) {
-	background:#fff;
-}
-
-.table-list tbody tr:hover {
-	background:#ddd;
-	cursor:pointer;
-}
+	.table-list thead tr {
+		background:#fff;
+	}
+		.table-list thead th {
+			font-size:20px;
+			text-transform: uppercase;
+			
+			padding:2px 5px;
+			text-align:center;
+		}
+	
+	.table-list tbody tr {
+		border-radius:5px;
+		border:1px solid red;
+		padding:50px;
+	}
+	.table-list tbody tr:nth-child(even) {
+		background:#fff;
+	}
+	.table-list tbody tr:nth-child(odd) {
+		background:#efefef;
+	}
+		.table-list tbody td {
+			padding:10px 10px;
+		}
+		.table-list tbody td:first-child {
+			border-top-left-radius:5px;
+			border-bottom-left-radius:5px;
+		}
+		
+		.table-list tbody td:last-child {
+			border-top-right-radius:5px;
+			border-bottom-right-radius:5px;
+		}

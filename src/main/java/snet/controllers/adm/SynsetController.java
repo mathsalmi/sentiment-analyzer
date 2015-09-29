@@ -39,6 +39,9 @@ public class SynsetController extends AbstractController {
 		return "synset/list";
 	}
 
+	/**
+	 * Envia para a view valores utilizados por várias telas
+	 */
 	private void setFieldValues(Model model) {
 		List<Language> langs = langService.listAllActive();
 		model.addAttribute("langs", langs);
@@ -78,13 +81,18 @@ public class SynsetController extends AbstractController {
 			synService.save(synset);
 		}
 
-		return "redirect:/synset";
+		return "redirect:/adm/synset/";
 	}
 
 	@RequestMapping("delete/{id}")
 	public String delete(@PathVariable int id) {
-		synService.delete(id);
+		//synService.delete(id);
 
-		return "redirect:/";
+		return "redirect:/adm/synset/";
+	}
+
+	@RequestMapping("refresh/{id}")
+	public String refreshValues(@PathVariable int id) {
+		return "redirect:/adm/synset/";
 	}
 }
