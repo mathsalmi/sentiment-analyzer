@@ -1,10 +1,11 @@
-package snet.controllers;
+package snet.controllers.adm;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import snet.annotations.MasterView;
+import snet.controllers.AbstractController;
 
 @Controller
 @RequestMapping("adm")

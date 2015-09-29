@@ -1,4 +1,4 @@
-package snet.controllers;
+package snet.controllers.adm;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import snet.annotations.MasterView;
+import snet.controllers.AbstractController;
 import snet.enums.SynsetTypeEnum;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
@@ -19,7 +20,7 @@ import snet.model.services.LanguageService;
 import snet.model.services.SynsetService;
 
 @Controller
-@RequestMapping("synset")
+@RequestMapping("adm/synset")
 @MasterView(name="index-adm")
 public class SynsetController extends AbstractController {
 
