@@ -23,8 +23,6 @@ var EditSynset = {
 	},
 	
 	onSubmit: function() {
-		console.log('hello');
-		
 		$('#termsWrapper .synset-item').each(function(index) {
 			$(this).children('input').each(function() {
 				var name = 'terms[' + index + '].' + $(this).attr('name'); 
