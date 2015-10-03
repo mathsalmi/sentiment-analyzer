@@ -15,7 +15,6 @@ import snet.controllers.AbstractController;
 import snet.enums.SynsetTypeEnum;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
-import snet.model.entities.SynsetTerm;
 import snet.model.services.LanguageService;
 import snet.model.services.SynsetService;
 
@@ -65,19 +64,10 @@ public class SynsetController extends AbstractController {
 		return "synset/edit";
 	}
 
+	// TODO: make it generic
 	@RequestMapping("save")
 	public String save(@ModelAttribute Synset synset, Errors errors) {
 		if( ! errors.hasErrors()) {
-			// fix relationship ids
-			List<SynsetTerm> terms = synset.getTerms();
-			if(terms != null && terms.size() > 0) {
-				for(SynsetTerm term : terms) {
-					if(term.getSynset() == null) {
-						term.setSynset(synset);
-					}
-				}
-			}
-
 			synService.save(synset);
 		}
 

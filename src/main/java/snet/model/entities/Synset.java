@@ -16,6 +16,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.util.AutoPopulatingList;
+import org.springframework.util.AutoPopulatingList.ElementFactory;
+
 import snet.converters.hibernate.SynsetTypeEnumConverter;
 import snet.enums.SynsetTypeEnum;
 
@@ -42,14 +45,21 @@ public class Synset {
 	private float negativeScore;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "synset")
-	private List<SynsetTerm> terms;
+	private final List<SynsetTerm> terms = new AutoPopulatingList<>(new ElementFactory<SynsetTerm>() {
+		@Override
+		public SynsetTerm createElement(int index) {
+			SynsetTerm st = new SynsetTerm();
+			st.setSynset(Synset.this);
+			return st;
+		}
+	});
 
 	@Column
 	private String gloss;
 
 	@ManyToOne
 	@JoinColumn(name = "language_id", nullable = false)
-	private Language language;
+	private Language language = new Language();
 
 	@Transient
 	public float getNeutralScore() {
@@ -98,10 +108,6 @@ public class Synset {
 
 	public List<SynsetTerm> getTerms() {
 		return terms;
-	}
-
-	public void setTerms(List<SynsetTerm> terms) {
-		this.terms = terms;
 	}
 
 	public String getGloss() {
