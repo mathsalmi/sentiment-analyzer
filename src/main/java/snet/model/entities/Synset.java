@@ -41,7 +41,7 @@ public class Synset {
 	@Column(name = "negative_score")
 	private float negativeScore;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "synset")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "synset")
 	private List<SynsetTerm> terms;
 
 	@Column
@@ -101,6 +101,10 @@ public class Synset {
 	}
 
 	public void setTerms(List<SynsetTerm> terms) {
+		if(this.terms != null) {
+			this.terms.clear();
+		}
+
 		this.terms = terms;
 	}
 

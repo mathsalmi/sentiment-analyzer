@@ -82,6 +82,9 @@ public class SynsetRepository {
 	@Transactional(readOnly=false)
 	public void save(Synset synset) throws Exception {
 		Session session = sessionFactory.getCurrentSession();
+
+		synset = (Synset) session.merge(synset);
+
 		session.saveOrUpdate(synset);
 	}
 
