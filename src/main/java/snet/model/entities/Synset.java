@@ -101,10 +101,6 @@ public class Synset {
 	}
 
 	public void setTerms(List<SynsetTerm> terms) {
-		if(this.terms != null) {
-			this.terms.clear();
-		}
-
 		this.terms = terms;
 	}
 
