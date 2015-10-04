@@ -63,7 +63,7 @@ public class SynsetRepository {
 	public Synset getById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 
-		Query q = session.createQuery("select s from Synset s inner join fetch s.terms where s.id=:id");
+		Query q = session.createQuery("select s from Synset s left join fetch s.terms where s.id=:id");
 		q.setInteger("id", id);
 
 		return (Synset) q.uniqueResult();
