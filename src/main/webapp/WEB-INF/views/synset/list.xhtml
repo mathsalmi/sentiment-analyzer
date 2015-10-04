@@ -24,7 +24,7 @@
 						<td>
 							<a th:href="@{'/adm/synset/edit/' + ${synset.id}}" class="glyphicon glyphicon-pencil" title="Editar"><span class="hidden">Editar</span></a>
 							<a th:href="@{'/adm/synset/refresh/' + ${synset.id}}" class="glyphicon glyphicon-refresh" title="Recalcular valores"><span class="hidden">Atualizar</span></a>
-							<a th:href="@{'/adm/synset/delete/' + ${synset.id}}" class="glyphicon glyphicon-remove" title="Excluir"><span class="hidden">Excluir</span></a>
+							<a data-toggle="modal" data-target="#confirmDelete" th:attr="data-url=@{'/adm/synset/delete/' + ${synset.id}}" class="glyphicon glyphicon-remove" title="Excluir"><span class="hidden">Excluir</span></a>
 						</td>
 						<td th:text="${synset.gloss}"></td>
 						<td class="text-center" th:text="${synset.type.name()}"></td>
@@ -35,4 +35,24 @@
 			</table>
 		</div>
 	</div>
+
+	<!-- Modal Delete Confirmation -->
+	<div id="confirmDelete" class="modal fade">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Exclusão</h4>
+				</div>
+				<div class="modal-body">Deseja excluir o synset?</div>
+				<div class="modal-footer">
+					<form th:action="@{/adm/synset/delete/}" method="post">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger btn-submit">Excluir</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script th:src="@{/resources/js/synset/list.js}"></script>
 </body>

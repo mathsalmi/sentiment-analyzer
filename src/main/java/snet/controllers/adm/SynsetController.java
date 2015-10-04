@@ -76,7 +76,7 @@ public class SynsetController extends AbstractController {
 
 	@RequestMapping("delete/{id}")
 	public String delete(@PathVariable int id) {
-		//synService.delete(id);
+		synService.delete(id);
 
 		return "redirect:/adm/synset/";
 	}
