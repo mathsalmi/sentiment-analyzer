@@ -17,39 +17,47 @@
 	</head>
 	
 	<body>
-		<header class="navbar navbar-header navbar-fixed-top">
-			<div class="container">
-				<div class="logo-header"><a th:href="@{/adm/}">SNeT Analyzer ADMIN</a></div>
-				<div class="pull-right" sec:authorize="isAuthenticated()">
-					<form th:action="@{/adm/logout}" method="post">
-						<input type="submit" value="Sair" class="btn btn-default" />
-					</form>
-				</div>
-				<div class="pull-right"> 
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown" title="Modificar o idioma de análise de sentimento">
-							<a class="dropdown-toggle lang-toggle" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
-								<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li th:each="lang : ${_cacheLangs}"><a th:href="'?_currLang=' + ${lang.id}" th:text="${lang.name}">Ação</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</header>
-		
-		<th:block th:include="${_page} :: body"></th:block>
-		
-		<footer class="navbar navbar-header navbar-fixed-bottom">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-push-2 text-center">
-						&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
+		<div class="all">
+			<header class="navbar navbar-header navbar-fixed-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="logo-header"><a th:href="@{/adm/}">SNeT Analyzer ADMIN</a></div>
+						</div>
+						<div class="col-md-3">
+							<div class="pull-right" sec:authorize="isAuthenticated()">
+								<form th:action="@{/adm/logout}" method="post">
+									<input type="submit" value="Sair" class="btn-logout" />
+								</form>
+							</div>
+							<div class="pull-right" style="margin-right:15px">
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown" title="Modificar o idioma de análise de sentimento">
+										<a class="dropdown-toggle lang-toggle" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
+											<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li th:each="lang : ${_cacheLangs}"><a th:href="'?_currLang=' + ${lang.id}" th:text="${lang.name}">Ação</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</footer>
+			</header>
+			
+			<th:block th:include="${_page} :: body"></th:block>
+			
+			<footer class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-push-2 text-center footer-content">
+							&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
 	</body>
 </html>

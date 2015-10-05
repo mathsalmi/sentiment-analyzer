@@ -1,13 +1,22 @@
 body {
 	font-weight:300;
-	
-	margin:100px 0;
+	padding:100px 0 0 0;
+}
+
+.all {
+	position:relative;
+	min-height:100%;	
 }
 
 .navbar-header {
 	color:#fff;
 	background:#323132;
 }
+
+.navbar-fixed-top {
+	border-width: 0;
+}
+
 	.logo-header {
 		float:left;
 		font-size:30px;
@@ -18,8 +27,45 @@ body {
 			color: inherit;
 			text-decoration: none;
 		}
-	
+		
 	.lang-toggle {
 		cursor:pointer;
-		color:#fff !important;
+		color:#fff;
 	}
+	
+	.lang-toggle:hover, .dropdown.open .lang-toggle {
+		color:#000;
+	}
+	
+	.btn-logout {
+		margin:0;
+		padding:15px 20px;
+		
+		border:0;
+		cursor:pointer;
+		
+		color:#000;
+		background:#eee;
+	}
+	.btn-logout:hover {
+		background:#ddd;
+	}
+
+.footer {
+	background:#323132;
+	
+	width:100%;
+	position: absolute;
+	left:0;
+	bottom:0;
+}
+
+	.footer-content {
+		color:#999;
+		padding:10px 0;
+	}
+
+/* Pagination */
+.pagination {
+	margin-bottom:50px;
+}
