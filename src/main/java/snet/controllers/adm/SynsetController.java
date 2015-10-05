@@ -12,9 +12,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import snet.annotations.MasterView;
 import snet.controllers.AbstractController;
+import snet.dto.FlashMsg;
+import snet.enums.FlashMsgTypeEnum;
 import snet.enums.SynsetTypeEnum;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
@@ -86,19 +89,28 @@ public class SynsetController extends AbstractController {
 		return "synset/edit";
 	}
 
-	// TODO: make it generic
 	@RequestMapping("save")
-	public String save(@ModelAttribute Synset synset, Errors errors) {
-		if( ! errors.hasErrors()) {
-			synService.save(synset);
+	public String save(@ModelAttribute Synset synset, Errors errors, RedirectAttributes ra) {
+		boolean success = ! errors.hasErrors(); 
+		if(success) {
+			success = synService.save(synset);
+		}
+
+		if(success) {
+			ra.addFlashAttribute("message", new FlashMsg("Conceito salvo com sucesso", FlashMsgTypeEnum.SUCCESS));
+		} else {
+			ra.addFlashAttribute("message", new FlashMsg("Erro ao salvar conceito!", FlashMsgTypeEnum.ERROR));
 		}
 
 		return "redirect:/adm/synset/";
 	}
 
 	@RequestMapping("delete/{id}")
-	public String delete(@PathVariable int id) {
-		synService.delete(id);
+	public String delete(@PathVariable int id, RedirectAttributes ra) {
+		boolean success = synService.delete(id);
+		if( ! success) {
+			ra.addFlashAttribute("message", new FlashMsg("Erro ao excluir conceito! Há outras ações dependentes dele (votos, termos etc.)", FlashMsgTypeEnum.ERROR));
+		}
 
 		return "redirect:/adm/synset/";
 	}

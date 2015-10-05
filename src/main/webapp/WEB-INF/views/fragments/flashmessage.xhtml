@@ -1,0 +1,5 @@
+<th:block th:if="${message != null}">
+	<div th:class="|alert alert-${message.type.code}|">
+		<th:block th:text="${message.message}"></th:block>
+	</div>
+</th:block>
