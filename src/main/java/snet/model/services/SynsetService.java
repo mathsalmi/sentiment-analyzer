@@ -3,6 +3,8 @@ package snet.model.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import snet.dto.SynsetValueDTO;
@@ -68,6 +70,10 @@ public class SynsetService {
 
 	public List<Synset> getByLangId(String langId) {
 		return synRepo.getByLangId(langId);
+	}
+
+	public Page<Synset> getByLangId(String langId, Pageable pageable) {
+		return synRepo.getByLangId(langId, pageable);
 	}
 
 	public boolean save(Synset synset) {

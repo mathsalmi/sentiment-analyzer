@@ -10,6 +10,9 @@ import snet.model.entities.Language;
 
 public abstract class AbstractController {
 
+	public static final int PAGINATION_FIRST_PAGE = 1;
+	public static final int PAGINATION_TOTAL_PER_PAGE = 10;
+
 	@Autowired
 	private HttpSession session;
 

@@ -20,7 +20,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="synset : ${synsets}">
+					<tr th:each="synset : ${currentResults.content}">
 						<td>
 							<a th:href="@{'/adm/synset/edit/' + ${synset.id}}" class="glyphicon glyphicon-pencil" title="Editar"><span class="hidden">Editar</span></a>
 							<a th:href="@{'/adm/synset/refresh/' + ${synset.id}}" class="glyphicon glyphicon-refresh" title="Recalcular valores"><span class="hidden">Atualizar</span></a>
@@ -34,25 +34,16 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-
-	<!-- Modal Delete Confirmation -->
-	<div id="confirmDelete" class="modal fade">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Exclusão</h4>
-				</div>
-				<div class="modal-body">Deseja excluir o synset?</div>
-				<div class="modal-footer">
-					<form th:action="@{/adm/synset/delete/}" method="post">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger btn-submit">Excluir</button>
-					</form>
-				</div>
+		
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<th:block th:include="fragments/paginator :: paginator(${currentResults.totalPages}, ${currentIndex}, ${beginIndex}, ${endIndex}, ${url})"></th:block>
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal Delete Confirmation -->
+	<th:block th:include="fragments/confirmDelete :: confirmDelete('Exclusão', 'Deseja excluir o synset?', '/adm/synset/delete/')"></th:block>
 	
 	<script th:src="@{/resources/js/synset/list.js}"></script>
 </body>

@@ -7,6 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,10 +76,26 @@ public class SynsetRepository {
 		Session session = sessionFactory.getCurrentSession();
 
 		Query q = session.createQuery("select s from Synset s where s.language.id=:langId");
-		q.setMaxResults(15); // TODO: max results per page
 		q.setString("langId", langId);
 
 		return q.list();
+	}
+
+	public Page<Synset> getByLangId(String langId, Pageable pageable) {
+		Session session = sessionFactory.getCurrentSession();
+
+		// total
+		Query q = session.createQuery("select count(1) from Synset s where s.language.id=:langId");
+		q.setString("langId", langId);
+		Long total = (Long) q.uniqueResult();
+
+		// results
+		q = session.createQuery("select s from Synset s where s.language.id=:langId order by id");
+		q.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
+		q.setMaxResults(pageable.getPageSize());
+		q.setString("langId", langId);
+
+		return new PageImpl<Synset>(q.list(), pageable, total);
 	}
 
 	@Transactional(readOnly=false)

@@ -1,0 +1,18 @@
+<th:block th:fragment="confirmDelete(title, text, stdUrl)">
+	<div id="confirmDelete" class="modal fade">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel" th:text="${title}"></h4>
+				</div>
+				<div class="modal-body" th:text="${text}"></div>
+				<div class="modal-footer">
+					<form th:action="@{${stdUrl}}" method="post">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger btn-submit">Excluir</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>

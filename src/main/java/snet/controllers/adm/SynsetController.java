@@ -3,6 +3,9 @@ package snet.controllers.adm;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -31,9 +34,28 @@ public class SynsetController extends AbstractController {
 
 	@RequestMapping("")
 	public String index(Model model) {
+		return index(model, PAGINATION_FIRST_PAGE);
+	}
 
-		List<Synset> synsets = synService.getByLangId(currLang().getId());
-		model.addAttribute("synsets", synsets);
+	@RequestMapping("{page}")
+	public String index(Model model, @PathVariable int page) {
+
+		Pageable pageable = new PageRequest(page - 1, PAGINATION_TOTAL_PER_PAGE);
+
+		Page<Synset> currentResults = synService.getByLangId(currLang().getId(), pageable);
+		model.addAttribute("currentResults", currentResults);
+
+		// Pagination variables
+		int begin = Math.max(1, page - 4);
+
+		// how many pages to display in the pagination bar
+		int end = Math.min(begin + 9, currentResults.getTotalPages());
+
+		model.addAttribute("beginIndex", begin);
+		model.addAttribute("endIndex", end);
+		model.addAttribute("currentIndex", page);
+
+		model.addAttribute("url", "/adm/synset/");
 
 		return "synset/list";
 	}

@@ -1,0 +1,28 @@
+<th:block th:fragment="paginator(totalPages, currentIndex, beginIndex, endIndex, url)">
+	<ul class="pagination">
+		<li th:class="${currentIndex == 1}? 'disabled' : ''">
+			<span th:if='${currentIndex == 1}'>← Primeira</span>
+			<a th:if='${currentIndex != 1}' th:href="@{${url} + '{page}'(page=1)}">← Primeira</a>
+		</li>
+		<li th:class="${currentIndex != 1}? '' : 'disabled'">
+			<span th:if='${currentIndex == 1}'>«</span>
+			<a th:if='${currentIndex != 1}' th:href="@{${url} + '{page}'(page=${currentIndex - 1})}" title='Página anterior'>«</a>
+		</li>
+
+		<li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}" th:class="${item == currentIndex ? 'active' : '' }">
+			<span th:if='${item == currentIndex}' th:text='${item}'>1</span>
+			<a th:if='${item != currentIndex}' th:href="@{${url} + '{page}'(page=${item})}">
+				<span th:text='${item}'>1</span>
+			</a>
+		</li>
+
+		<li th:class="${currentIndex != totalPages}? '' : 'disabled'">
+			<span th:if='${currentIndex == totalPages}'>»</span>
+			<a th:if='${currentIndex != totalPages}' th:href="@{${url} + '{page}'(page=${currentIndex + 1})}" title='Próxima página'>»</a>
+		</li>
+		<li th:class="${currentIndex == totalPages}? 'disabled' : ''">
+			<span th:if='${currentIndex == totalPages}'>Última →</span>
+			<a th:if='${currentIndex != totalPages}' th:href="@{${url} + '{page}'(page=${totalPages})}">Última →</a>
+		</li>
+	</ul>
+</th:block>
