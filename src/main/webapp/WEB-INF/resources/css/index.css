@@ -25,6 +25,7 @@
 	
 .search-result {
 	width:420px;
+	min-height:132px;
 	margin:100px auto 0 auto;
 
 	padding:20px;
@@ -55,3 +56,11 @@
 	.search-result-color-5 {
 		background:rgba(123,188,161,0.8);
 	}
+
+.contribute-row {
+	margin-top:100px;
+}
+
+.contribute-btn {
+	margin-bottom:10px;
+}

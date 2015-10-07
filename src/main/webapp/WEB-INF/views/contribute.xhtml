@@ -1,0 +1,51 @@
+<head>
+	<link rel="stylesheet" th:href="@{/resources/css/contribute.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row question-row">
+			<div class="col-md-8 col-md-offset-2 text-center">
+				<p class="question-text">Como você avalia <strong th:text="${synsetTerm.term}">XXX</strong> no seguinte contexto?</p>
+				<blockquote>
+					<p th:text="${synsetTerm.synset.gloss}"></p>
+				</blockquote>
+			</div>
+		</div>
+		
+		<div class="row sliders-row">
+			<div class="col-md-4 col-md-offset-4">
+				
+				<div class="slider-item">
+					<h5 class="slider-title">Positivo</h5>
+					<div id="posSlider" class="slider"></div>
+					<div class="slider-value">0%</div>
+				</div>
+				
+				<div class="slider-item">
+					<h5 class="slider-title">Neutro</h5>
+					<div id="objSlider" class="slider"></div>
+					<div class="slider-value">0%</div>
+				</div>
+				
+				<div class="slider-item">
+					<h5 class="slider-title">Negativo</h5>
+					<div id="negSlider" class="slider"></div>
+					<div class="slider-value">0%</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row form-row">
+			<div class="col-md-4 col-md-offset-4 text-center">
+				<form th:action="@{/contribute}" id="voteForm" method="post">
+					<input type="hidden" name="synsetTerm.id" th:value="${synsetTerm.id}" />
+					<input type="hidden" name="positiveScore" />
+					<input type="hidden" name="negativeScore" />
+					<input type="submit" value="Votar" class="btn btn-common" />
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script th:src="@{/resources/js/contribute.js}"></script>
+</body>

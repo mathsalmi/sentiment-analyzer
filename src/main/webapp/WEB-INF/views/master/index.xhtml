@@ -9,50 +9,54 @@
 		<link rel="stylesheet" th:href="@{/resources/vendor/bootstrap-3.3.5/css/bootstrap-theme.min.css}" />
 		<link rel="stylesheet" th:href="@{/resources/css/master/common.css}" />
 		<link rel="stylesheet" th:href="@{/resources/css/master/index.css}" />
+		<link rel="stylesheet" th:href="@{/resources/vendor/jquery-ui/jquery-ui.min.css}" />
 		
 		<th:block th:include="${_page} :: head"></th:block>
 		
 		<script th:src="@{/resources/vendor/jquery/jquery-1.11.3.min.js}"></script>
 		<script th:src="@{/resources/vendor/bootstrap-3.3.5/js/bootstrap.min.js}"></script>
+		<script th:src="@{/resources/vendor/jquery-ui/jquery-ui.min.js}"></script>
 	</head>
 	
 	<body>
-		<header>
-			<div class="container header-bottom-line">
-				<div class="row header">
-					<div class="col-md-8 col-md-offset-2 text-center header-logo-group">
-						<h1 class="header-logo">
-							<a th:href="@{/}">
-								<img th:src="@{/resources/img/logo.png}" alt="SNeT Analyzer" />
-							</a>
-						</h1>
-						<p class="header-phrase">O SNeT Analyzer busca identificar o sentimento expresso nas frases, avaliando-as em positivas, negativas ou neutras.</p>
-					</div>
-					
-					<div class="col-md-2">
-						<div class="dropdown lang-btn pull-right" title="Modificar o idioma de análise de sentimento">
-							<a class="dropdown-toggle lang-btn-current btn" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
-								<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
-							</a>
-							<ul class="dropdown-menu dropdown-menu-right">
-								<li th:each="lang : ${_cacheLangs}"><a th:href="'?_currLang=' + ${lang.id}" th:text="${lang.name}">Ação</a></li>
-							</ul>
+		<div class="all">
+			<header>
+				<div class="container header-bottom-line">
+					<div class="row header">
+						<div class="col-md-8 col-md-offset-2 text-center header-logo-group">
+							<h1 class="header-logo">
+								<a th:href="@{/}">
+									<img th:src="@{/resources/img/logo.png}" alt="SNeT Analyzer" />
+								</a>
+							</h1>
+							<p class="header-phrase">O SNeT Analyzer busca identificar o sentimento expresso nas frases, avaliando-as em positivas, negativas ou neutras.</p>
+						</div>
+						
+						<div class="col-md-2">
+							<div class="dropdown lang-btn pull-right" title="Modificar o idioma de análise de sentimento">
+								<a class="dropdown-toggle lang-btn-current btn btn-common" th:attr="data-toggle=${#lists.size(_cacheLangs) > 1} ? 'dropdown'">
+									<th:block th:text="${_currLang.name}"></th:block><span th:if="${#lists.size(_cacheLangs) > 1}" class="caret"></span>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li th:each="lang : ${_cacheLangs}"><a th:href="'?_currLang=' + ${lang.id}" th:text="${lang.name}">Ação</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
-		
-		<th:block th:include="${_page} :: body"></th:block>
-		
-		<footer class="footer navbar-fixed-bottom">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-push-2 text-center footer-content">
-						&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
+			</header>
+			
+			<th:block th:include="${_page} :: body"></th:block>
+			
+			<footer class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-push-2 text-center footer-content">
+							&copy; SNeT Analyzer - Matheus Salmi e Márcio Giovane, 2015
+						</div>
 					</div>
 				</div>
-			</div>
-		</footer>
+			</footer>
+		</div>
 	</body>
 </html>

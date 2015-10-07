@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import snet.dto.SynsetValueDTO;
 import snet.model.entities.Language;
 import snet.model.entities.Synset;
+import snet.model.entities.SynsetTerm;
 
 @Repository
 @Transactional(readOnly = true)
@@ -113,5 +114,15 @@ public class SynsetRepository {
 		Query q = session.createSQLQuery("delete from synset where id=:id");
 		q.setInteger("id", id);
 		q.executeUpdate();
+	}
+
+	// TODO: rewrite the SQL in order to make this method faster
+	public SynsetTerm getTermRandomlyByLang(Language lang) {
+		Session session = sessionFactory.getCurrentSession();
+		Query q = session.createQuery("select st from SynsetTerm st inner join fetch st.synset s where s.language.id=:langId order by rand()");
+		q.setParameter("langId", lang.getId());
+		q.setMaxResults(1);
+
+		return (SynsetTerm) q.uniqueResult();
 	}
 }

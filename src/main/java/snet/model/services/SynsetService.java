@@ -103,4 +103,8 @@ public class SynsetService {
 
 		return false;
 	}
+
+	public SynsetTerm getTermRandomlyByLang(Language lang) {
+		return synRepo.getTermRandomlyByLang(lang);
+	}
 }

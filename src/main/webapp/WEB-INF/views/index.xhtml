@@ -16,10 +16,18 @@
 			</div>
 		</div>
 		
-		<div class="row" th:if="${phraseScore} != null">
-			<div th:class="'search-result search-result-color-' + ${phraseScore.code}">
+		<div class="row">
+			<div th:if="${phraseScore} != null" th:class="|search-result search-result-color-${phraseScore.code}|">
 				<div class="search-result-text">Resultado:</div>
 				<div th:text="${phraseScore.toString()}" class="search-result-classify"></div>
+			</div>
+			
+			<div th:if="${phraseScore} == null" class="search-result">
+			</div>
+			
+			<div class="text-center contribute-row">
+				<a th:href="@{/contribute}" class="btn btn-common contribute-btn">Contribuir</a>
+				<p>Ajude a melhorar o Sentiment Analyzer. Dê sua opinião!</p>
 			</div>
 		</div>
 	</div>
