@@ -129,7 +129,6 @@ var Contribute = {
 	},
 	
 	submit: function(e) {
-		e.preventDefault();
 		var self = this;
 		
 		var positive = self.posSlider.slider('value') / 100;

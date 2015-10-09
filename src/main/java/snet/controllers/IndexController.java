@@ -18,6 +18,7 @@ import snet.enums.PhraseScoreEnum;
 import snet.model.entities.SynsetTerm;
 import snet.model.entities.SynsetTermVote;
 import snet.model.services.SynsetService;
+import snet.model.services.SynsetTermVoteService;
 
 @Controller
 @RequestMapping("/")
@@ -26,6 +27,9 @@ public class IndexController extends AbstractController {
 
 	@Autowired
 	private SynsetService synService;
+
+	@Autowired
+	private SynsetTermVoteService voteService;
 
 	@RequestMapping("/")
 	public String index(@RequestParam(required=false) String phrase, Model model) {
@@ -49,10 +53,19 @@ public class IndexController extends AbstractController {
 
 	@RequestMapping(value="contribute", method=RequestMethod.POST)
 	public String saveContribution(@ModelAttribute SynsetTermVote vote, Errors errors, RedirectAttributes ra) {
-		// get entity
-		// validate entity
-		// save entity
-		ra.addFlashAttribute("message", new FlashMsg("Voto computado com sucesso. Obrigado! ;)", FlashMsgTypeEnum.SUCCESS));
+		boolean success = ! errors.hasErrors();
+		if(success) {
+			success = voteService.save(vote);
+		}
+
+		FlashMsg msg = null;
+		if(success) {
+			msg = new FlashMsg("Voto computado com sucesso. Obrigado! ;)", FlashMsgTypeEnum.SUCCESS);
+		} else {
+			msg = new FlashMsg("Erro ao computar voto =(", FlashMsgTypeEnum.ERROR);
+		}
+
+		ra.addFlashAttribute("message", msg);
 		return "redirect:/contribute";
 	}
 }

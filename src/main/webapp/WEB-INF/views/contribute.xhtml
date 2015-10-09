@@ -3,6 +3,12 @@
 </head>
 <body>
 	<div class="container">
+		<div class="row message-row" th:if="${message} != null">
+			<div class="col-md-8 col-md-offset-2">
+				<th:block th:include="fragments/flashmessage"></th:block>
+			</div>
+		</div>
+		
 		<div class="row question-row">
 			<div class="col-md-8 col-md-offset-2 text-center">
 				<p class="question-text">Como você avalia <strong th:text="${synsetTerm.term}">XXX</strong> no seguinte contexto?</p>

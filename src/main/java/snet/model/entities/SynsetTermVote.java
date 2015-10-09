@@ -23,7 +23,7 @@ public class SynsetTermVote {
 
 	@ManyToOne
 	@JoinColumn(name = "synset_term_id", nullable = false)
-	private SynsetTerm synsetTerm;
+	private SynsetTerm synsetTerm = new SynsetTerm();
 
 	@Column(name = "positive_score")
 	private float positiveScore;
