@@ -116,7 +116,32 @@ public class SynsetController extends AbstractController {
 	}
 
 	@RequestMapping("refresh/{id}")
-	public String refreshValues(@PathVariable int id) {
+	public String refreshValues(@PathVariable int id, RedirectAttributes ra) {
+		FlashMsg msg = null;
+		boolean success = synService.refreshValues(id, currLang());
+		if(success) {
+			msg = new FlashMsg("Estatísticas atualizadas com sucesso.", FlashMsgTypeEnum.SUCCESS);
+		} else {
+			msg = new FlashMsg("Erro ao atualizar estatísticas.", FlashMsgTypeEnum.ERROR);
+		}
+
+		ra.addFlashAttribute("message", msg);
+
+		return "redirect:/adm/synset/";
+	}
+
+	@RequestMapping("refresh-all")
+	public String refreshAllValues(RedirectAttributes ra) {
+		FlashMsg msg = null;
+		boolean success = synService.refreshAllValues(currLang());
+		if(success) {
+			msg = new FlashMsg("Estatísticas atualizadas com sucesso.", FlashMsgTypeEnum.SUCCESS);
+		} else {
+			msg = new FlashMsg("Erro ao atualizar estatísticas.", FlashMsgTypeEnum.ERROR);
+		}
+
+		ra.addFlashAttribute("message", msg);
+
 		return "redirect:/adm/synset/";
 	}
 }

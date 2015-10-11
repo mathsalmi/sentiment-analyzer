@@ -107,4 +107,24 @@ public class SynsetService {
 	public SynsetTerm getTermRandomlyByLang(Language lang) {
 		return synRepo.getTermRandomlyByLang(lang);
 	}
+
+	public boolean refreshValues(int id, Language lang) {
+		try {
+			synRepo.refreshValues(id, lang);
+			return true;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean refreshAllValues(Language lang) {
+		try {
+			synRepo.refreshAllValues(lang);
+			return true;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

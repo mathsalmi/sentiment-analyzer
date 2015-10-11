@@ -125,4 +125,21 @@ public class SynsetRepository {
 
 		return (SynsetTerm) q.uniqueResult();
 	}
+
+	@Transactional(readOnly=false)
+	public void refreshValues(int id, Language lang) {
+		Session session = sessionFactory.getCurrentSession();
+		Query q = session.createSQLQuery("select fn_update_synset_with_votes(:langId, :id)");
+		q.setParameter("langId", lang.getId());
+		q.setParameter("id", id);
+		q.uniqueResult();
+	}
+
+	@Transactional(readOnly=false)
+	public void refreshAllValues(Language lang) {
+		Session session = sessionFactory.getCurrentSession();
+		Query q = session.createSQLQuery("select fn_update_synset_with_votes(:langId)");
+		q.setParameter("langId", lang.getId());
+		q.uniqueResult();
+	}
 }
