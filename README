@@ -1,0 +1,11 @@
+Sentiment Analyzer
+===
+
+It is a...
+
+TODO:
+===
+
+* validate inputs (on admin)
+* on synset vote: add user information (browser, ip, language etc.)
+* create job on DB to recalculate synset weights
