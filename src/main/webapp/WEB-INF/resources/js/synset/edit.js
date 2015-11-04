@@ -7,10 +7,7 @@ var EditSynset = {
 			self.newTerm();
 		})
 		
-		$('.synset-btn-delete').click(function(e) {
-			e.preventDefault();
-			$(this).closest('.synset-item').remove();
-		})
+		self.addDeleteSynsetEvent('.synset-btn-delete');
 		
 		$('#formSynset').on('submit', function(e) {
 			self.onSubmit();
@@ -18,8 +15,11 @@ var EditSynset = {
 	},
 	
 	newTerm: function() {
+		var self = this;
 		var fields = $('#fieldsTmpl').html();
-		$('#termsWrapper').append(fields);
+		var newfield = $(fields).appendTo('#termsWrapper');
+		
+		self.addDeleteSynsetEvent(newfield.find('.synset-btn-delete'));
 	},
 	
 	onSubmit: function() {
@@ -29,7 +29,14 @@ var EditSynset = {
 				$(this).attr('name', name);
 			})
 		})
-	}
+	},
+	
+	addDeleteSynsetEvent: function(selector) {
+		$(selector).click(function(e) {
+			e.preventDefault();
+			$(this).closest('.synset-item').remove();
+		})
+	},
 }
 
 $(document).ready(function() {
