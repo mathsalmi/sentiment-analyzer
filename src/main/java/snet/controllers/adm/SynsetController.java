@@ -108,7 +108,9 @@ public class SynsetController extends AbstractController {
 	@RequestMapping("delete/{id}")
 	public String delete(@PathVariable int id, RedirectAttributes ra) {
 		boolean success = synService.delete(id);
-		if( ! success) {
+		if(success) {
+			ra.addFlashAttribute("message", new FlashMsg("Conceito excluído com sucesso", FlashMsgTypeEnum.SUCCESS));
+		} else {
 			ra.addFlashAttribute("message", new FlashMsg("Erro ao excluir conceito! Há outras ações dependentes dele (votos, termos etc.)", FlashMsgTypeEnum.ERROR));
 		}
 
