@@ -13,12 +13,15 @@ import snet.model.entities.Language;
 import snet.model.entities.Synset;
 import snet.model.entities.SynsetTerm;
 import snet.model.repositories.SynsetRepository;
+import snet.model.repositories.SynsetTermRepository;
 
 @Service
 public class SynsetService {
 
 	@Autowired
 	private SynsetRepository synRepo;
+	@Autowired
+	private SynsetTermRepository synTermRepo;
 
 	public List<SynsetValueDTO> getPhraseTokens(String phrase, Language lang) {
 		if(phrase != null) {
@@ -95,6 +98,7 @@ public class SynsetService {
 
 	public boolean delete(int id) {
 		try {
+			synTermRepo.deleteBySynsetId(id);
 			synRepo.delete(id);
 			return true;
 		} catch(Exception e) {
