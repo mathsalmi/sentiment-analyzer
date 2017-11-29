@@ -1,14 +1,14 @@
 Sentiment Analyzer
 ===
 
-A web app used to infer sentiment expressed in texts using the SentiWordNet, a sentiment analysis technique.
+A web app used to infer sentiments expressed in texts. It uses [SentiWordNet](http://sentiwordnet.isti.cnr.it), a sentiment analysis technique.
 
-It initially supports English and Brazilian Portuguese but it is completely possible to register new languages and train the system to infer sentiments.
+It initially supports English and Brazilian Portuguese but it is possible to register new languages and train the system to infer sentiments.
 
 Training Process:
 ---
 
-The system uses a dictionary with the words of each language the system aims to support. These words must be registered by an administrator before the system is capable to analyze texts written in such languages.
+The system uses a dictionary with the words of each language it aims to support. These words must be registered by an administrator before the system is capable to analyze texts written in such languages.
 
 For the English language it's used the dictionary provided by the [SentiWordNet](http://sentiwordnet.isti.cnr.it) project, so many thanks to them for making available such great work.
 
@@ -17,7 +17,7 @@ Votes:
 
 After the words are registered there is one more step before using the system: classifying each word.
 
-Because this is such a huge effort the system makes public a section in which users will see words and concepts randomnly shown so they can vote by choosing the percent of positivity, negative or objectivity (neutral).
+Because this is such a huge effort the system has a public section in which users will see words and concepts randomnly so they can vote by choosing the percent of positivity, negative or objectivity (neutral).
 
 Ideas:
 ---
@@ -29,11 +29,11 @@ For example: in Portuguese words vary in gender and number, verbs have different
 Screenshots:
 ---
 
-![Home] (https://raw.githubusercontent.com/mathsalmi/snet/master/screenshot-1.png)
-*Home*
+### Home
+![Home](https://raw.githubusercontent.com/mathsalmi/snet/master/screenshot-1.png)
 
-![Results] (https://raw.githubusercontent.com/mathsalmi/snet/master/screenshot-2.png)
-*Inferring texts*
+### Inferring texts
+![Results](https://raw.githubusercontent.com/mathsalmi/snet/master/screenshot-2.png)
 
-![Voting page] (https://raw.githubusercontent.com/mathsalmi/snet/master/screenshot-3.png)
-*Voting page*
+### Voting page
+![Voting page](https://raw.githubusercontent.com/mathsalmi/snet/master/screenshot-3.png)
