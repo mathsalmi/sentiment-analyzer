@@ -11,8 +11,6 @@ public class FlashMsg {
 	private String message;
 	private FlashMsgTypeEnum type;
 
-	private FlashMsg() {}
-
 	public FlashMsg(String message) {
 		this(message, FlashMsgTypeEnum.INFO);
 	}
